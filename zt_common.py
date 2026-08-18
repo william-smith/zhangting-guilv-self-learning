@@ -5,13 +5,14 @@ zt_common.py —— 涨停候选筛选 共享引擎
 仅依赖 requests / akshare(用于一次性取全A代码列表并缓存)。
 """
 import os, json, time, statistics, re, subprocess, sys
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from concurrent.futures import ThreadPoolExecutor
 
 WORKDIR = os.path.dirname(os.path.abspath(__file__))
 CODES_CACHE = os.path.join(WORKDIR, "codes_cache.json")
 RULES_FILE = os.path.join(WORKDIR, "rules.json")
 HISTORY_FILE = os.path.join(WORKDIR, "history.jsonl")
+KLINES_CACHE = os.path.join(WORKDIR, "klines_cache.json")
 
 DEFAULT_RULES = {
     "version": 1,
@@ -101,11 +102,38 @@ def get_codes(force=False):
     return items
 
 
-# ---------------- 新浪日线K线 ----------------
+# ---------------- 日线K线(主源:东方财富历史K线 / 兜底:新浪) ----------------
 def fetch_kline(sym, n=70):
+    """日线K线: 主源东方财富历史K线(push2his,沙箱内稳定), 失败兜底新浪"""
+    code = sym[2:] if sym[:2] in ("sh", "sz") else sym
+    sec = ("1." + code) if code.startswith("6") else ("0." + code)
+    url = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
+    p = {"secid": sec, "fields1": "f1,f2,f3", "fields2": "f51,f52,f53,f54,f55,f56",
+         "klt": "101", "fqt": "0", "beg": "0", "end": "20500101", "lmt": str(n)}
+    for _ in range(3):
+        try:
+            r = requests.get(url, p, timeout=8, headers={"User-Agent": "Mozilla/5.0"})
+            d = r.json()
+            kl = d.get("data", {}).get("klines", [])
+            if kl:
+                out = []
+                for row in kl[-n:]:
+                    x = row.split(",")
+                    if len(x) < 6:
+                        continue
+                    out.append({"day": x[0], "open": float(x[1]), "close": float(x[2]),
+                                "high": float(x[3]), "low": float(x[4]), "volume": float(x[5])})
+                if out:
+                    return out
+        except Exception:
+            time.sleep(0.4)
+    return _fetch_kline_sina(sym, n)
+
+
+def _fetch_kline_sina(sym, n=70):
     url = "https://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData"
     p = {"symbol": sym, "scale": 240, "ma": "no", "datalen": n}
-    for _ in range(3):
+    for _ in range(2):
         try:
             r = requests.get(url, p, headers={"Referer": "https://finance.sina.com.cn"}, timeout=8)
             d = json.loads(r.text)
@@ -163,6 +191,7 @@ def fetch_tencent(codes):
         q = ",".join(ch)
         try:
             r = requests.get("https://qt.gtimg.cn/q=" + q, timeout=15)
+            r.encoding = "gbk"
             for line in r.text.strip().split(";"):
                 m = re.search(r'v_(\w+)="([^"]*)"', line)
                 if not m:
@@ -177,6 +206,7 @@ def fetch_tencent(codes):
                         chg_pct=float(parts[32] or 0),
                         turnover=float(parts[38] or 0),
                         float_mkt=float(parts[45] or 0),   # 流通市值(亿)
+                        vratio=float(parts[43] or 0),      # 量比
                     )
                 except Exception:
                     continue
@@ -265,3 +295,106 @@ def signal_text(feat, spot=None, comps=None):
     if turn >= 5:
         tags.append("换手活跃")
     return "·".join(tags) if tags else "—"
+
+
+def dummy_feat(sp):
+    """K线源不可用时, 用腾讯快照因子构造伪特征(量比/涨跌幅/市值), 供 score_stock 复用打分"""
+    vr = (sp.get("vratio", 0) or 0)
+    chg = (sp.get("chg_pct", 0) or 0)
+    return dict(vratio=vr, ma5=0, ma10=0, ma20=0, ma60=0,
+                zt20=0, zt5=0, newhigh20=False, bull=False,
+                chg1=0, chg5=0, chg10=chg / 100.0,
+                above20=False, above60=False, drawdown=0.0,
+                last=sp.get("price", 0) or 0, last_day="")
+
+
+# ---------------- 本地K线缓存层(按交易日缓存, 大幅降低全市场抓取耗时) ----------------
+def _ref_latest_day():
+    """参考股(茅台)最新K线交易日，用于判断数据新鲜度"""
+    kl = fetch_kline("sh600519", n=6)
+    if kl:
+        try:
+            return datetime.strptime(kl[-1]["day"], "%Y-%m-%d").date()
+        except Exception:
+            pass
+    return date.today()
+
+
+def target_day(for_close=False):
+    """返回应使用的最新交易日：
+       - 收盘复盘: 含今日(盘后日线已完整)
+       - 开盘前:   上一交易日(避开今日盘中不完整日线)
+    """
+    latest = _ref_latest_day()
+    if for_close:
+        return latest.isoformat()
+    d = latest
+    if d >= date.today():
+        # 最新已含今日或更晚(盘中), 回退到上一交易日
+        d = date.today() - timedelta(days=1)
+        while d.weekday() >= 5:
+            d -= timedelta(days=1)
+    return d.isoformat()
+
+
+def fetch_klines_cached(codes, target, n=70):
+    """K线批量获取(按交易日缓存, 增量：仅抓取 codes 中缺失项)：
+       配合两阶段筛选, 每日只抓'异动子集'(数百只)而非全市场, 规避东方财富限流导致的长时间抓取。"""
+    data = {}
+    if os.path.exists(KLINES_CACHE):
+        try:
+            cache = json.load(open(KLINES_CACHE, encoding="utf-8"))
+            if cache.get("updated") == target:
+                data = cache.get("data", {})
+        except Exception:
+            pass
+    syms = [tenc_code(c) for c in codes if tenc_code(c) and c not in data]
+    if not syms:
+        return {c: data[c] for c in codes if c in data}
+    new = {}
+
+    def work(sym):
+        return sym[2:], fetch_kline(sym, n=n)
+
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        for code, kl in ex.map(work, syms):
+            if kl:
+                new[code] = kl
+    # 多轮补抓(降并发+轮间冷却, 应对东方财富限流)
+    for wkr in (4, 2):
+        miss = [s for s in syms if s[2:] not in new]
+        if not miss:
+            break
+        time.sleep(2)
+        with ThreadPoolExecutor(max_workers=wkr) as ex:
+            for code, kl in ex.map(work, miss):
+                if kl:
+                    new[code] = kl
+    miss = [s for s in syms if s[2:] not in new]
+    if miss:
+        with ThreadPoolExecutor(max_workers=1) as ex:
+            for code, kl in ex.map(work, miss):
+                if kl:
+                    new[code] = kl
+    data.update(new)
+    if new:
+        try:
+            json.dump({"updated": target, "data": data},
+                      open(KLINES_CACHE, "w", encoding="utf-8"), ensure_ascii=False)
+        except Exception:
+            pass
+    return {c: data[c] for c in codes if c in data}
+
+
+def build_features(codes, for_close=False, n=70):
+    """返回 {code: feat_dict}；开盘前/收盘后复用同一份按交易日缓存的K线数据"""
+    target = target_day(for_close)
+    data = fetch_klines_cached(list(codes), target, n=n)
+    out = {}
+    for c in codes:
+        kl = data.get(c)
+        if kl:
+            f = compute_kline_features(kl)
+            if f:
+                out[c] = f
+    return out

@@ -4,7 +4,7 @@ screen_open.py —— 开盘前筛选(约09:00运行)
 用上一交易日收盘数据，按 rules.json 规律对全市场打分，输出当日涨停候选。
 产出: candidates_YYYY-MM-DD.md(可读报告) + candidates_YYYY-MM-DD.json(供收盘复盘比对)
 """
-import os, json
+import os, json, time
 from datetime import datetime, date
 from concurrent.futures import ThreadPoolExecutor
 
@@ -35,19 +35,31 @@ def main():
     raw = [c for c, n in pool]
     spot = C.fetch_tencent(raw)
     print("腾讯快照获取: %d 只" % len(spot))
-
-    feats = {}
-    def work(c):
-        sym = C.tenc_code(c)
-        kl = C.fetch_kline(sym, n=70)
-        if not kl:
-            return c, None
-        return c, C.compute_kline_features(kl)
-
-    print("拉取日线并计算因子(并发)...")
-    with ThreadPoolExecutor(max_workers=12) as ex:
-        for c, f in ex.map(work, raw):
-            feats[c] = f
+    # 快速探测K线源是否可用且快(东财等); 限流/失败时降级纯快照, 避免长时阻塞
+    t0 = time.time()
+    probe = [c for c in raw[:20] if C.tenc_code(c)]
+    okp = sum(1 for c in probe if C.fetch_kline(C.tenc_code(c), 5))
+    dt = time.time() - t0
+    kline_ok = (okp >= len(probe) * 0.5) and (dt < 60)
+    # 阶段1 粗筛: 量比/涨跌幅/换手 异动 -> 子集
+    sub = [c for c in raw
+           if (spot.get(c, {}).get("vratio", 0) or 0) >= 1.3
+           or (spot.get(c, {}).get("chg_pct", 0) or 0) >= 3
+           or (spot.get(c, {}).get("turnover", 0) or 0) >= 3]
+    if len(sub) > 800:
+        def _kk(c):
+            sp = spot.get(c, {})
+            return ((sp.get("vratio", 0) or 0)
+                    + (sp.get("chg_pct", 0) or 0) * 0.15
+                    + (sp.get("turnover", 0) or 0) * 0.15)
+        sub = sorted(sub, key=lambda c: -_kk(c))[:800]
+    print("粗筛异动子集: %d 只" % len(sub))
+    if kline_ok:
+        print("K线源可用, 抓K线算精细因子(涨停基因/均线/突破)...")
+        feats = C.build_features(sub, for_close=False, n=70)
+    else:
+        print("K线源受限(探测 %d/%d, 耗时%.0fs), 降级纯快照因子" % (okp, len(probe), dt))
+        feats = {c: C.dummy_feat(spot[c]) for c in sub if c in spot}
 
     results = []
     for c, n in pool:
@@ -77,8 +89,9 @@ def main():
     # ---- 写 MD 报告 ----
     lines = []
     lines.append("# 开盘前涨停候选 %s\n" % datestr)
-    lines.append("> 数据源：新浪日线 + 腾讯快照；评分规则版本 v%s；阈值 量比≥%.2f"
-                 % (rules.get("version"), rules["min_volume_ratio"]))
+    src = "腾讯快照(纯快照降级·缺K线精细因子)" if not kline_ok else "新浪/东财K线 + 腾讯快照"
+    lines.append("> 数据源：%s；评分规则版本 v%s；阈值 量比≥%.2f"
+                 % (src, rules.get("version"), rules["min_volume_ratio"]))
     lines.append("> ⚠️ 量化辅助筛选，非投资建议，涨停不保证。\n")
     lines.append("| 排名 | 代码 | 名称 | 评分 | 量比 | 近20日涨停 | 创20日高 | 均线多头 | 近10日% | 流通市值(亿) | 换手% | 核心信号 |")
     lines.append("|------|------|------|------|------|-----------|---------|---------|--------|------------|-------|---------|")

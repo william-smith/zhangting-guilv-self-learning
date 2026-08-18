@@ -60,16 +60,7 @@ def main():
 
     # ---- 取因子(命中组 / 落选组)用于学习 ----
     need = list(set(hits) | set(miss_top) | set(leak))
-    feats = {}
-    def work(c):
-        sym = C.tenc_code(c)
-        kl = C.fetch_kline(sym, n=70)
-        if not kl:
-            return c, None
-        return c, C.compute_kline_features(kl)
-    with ThreadPoolExecutor(max_workers=12) as ex:
-        for c, f in ex.map(work, need):
-            feats[c] = f
+    feats = C.build_features(need, for_close=True, n=70)
 
     def comps_of(c):
         f = feats.get(c)
