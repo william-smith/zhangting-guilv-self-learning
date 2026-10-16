@@ -1,88 +1,95 @@
-# 开盘前候选产物上传 Runbook（项目资产网盘）
+# 开盘前候选产物上传 / 收盘复盘 发布 Runbook（GitHub + jsDelivr 版）
 
-适用：每日开盘前 `zhangting-guilv-self-learning` 系统筛出 `candidates_YYYY-MM-DD.{md,json}` 后，
-将其存入**项目资产网盘根目录**（`QknZxBQNxaGn`，即各 `.py` 脚本平铺所在的同步根目录），
-供团队成员查看使用。
+适用：每日 `zhangting-guilv-self-learning` 系统筛出 `candidates_YYYY-MM-DD.{md,json}`（开盘前）、
+生成 `review_YYYY-MM-DD.md` 并更新 `rules.json`/`history.jsonl`（收盘后）后，将产物提交到
+**GitHub 仓库 `william-smith/zhangting-guilv-self-learning`**，供团队成员经 **jsDelivr CDN** 读取。
 
-> 变更记录（2026-09-25）：目录整理后原 `cache` 子目录（`QjMEDRBpayWp`）已删除，全部文件平铺到
-> 根目录。故**上传目标从 `cache` 子目录改为根目录 `QknZxBQNxaGn`**；定时任务工作目录同样改为
-> 根同步目录（见 README「部署为定时任务」章节与自动化任务 prompt）。下文所有 `cache` 引用均替换为根目录。
-
----
-
-## ★ Step 0 前置探针（必做，本次新增）
-
-> 教训：2026-09-18 早盘，`netdrive`(tdrive) MCP 连接器在会话中**未连接**，所有
-> `tdrive.file_*` 调用均返回 `Tool not found in deferred tools index` / `Failed to connect`，
-> 导致"脚本跑了但项目盘里没东西"。上传前必须先确认通道可用。
-
-1. 调用 `WaitForMcpServers(["netdrive"])`（或等价连接器就绪检查）。
-2. 返回 `ready: true. Connected (their tools are now available)` → **继续 Step 1–4 上传**。
-3. 返回 `Failed to connect: netdrive` / `no MCP server with this name is configured` →
-   - **禁止尝试上传**。立即输出告警：
-     `任务①产物上传失败：netdrive 连接器未连接，云端通道不可用，产物仅落本地同步根目录`。
-   - 指数退避重试探针（建议最多 3 次，间隔 30–60s）；仍不通则等待连接器恢复后由人工/定时重跑。
-   - **连接器恢复（探针 ready）后，再执行 Step 1–4**。
-4. 探针始终不通：产物保留在本地同步根目录，日志明确标注"待重传"，**禁止静默结束**。
+> 变更（2026-10-16）：原「项目资产网盘（tdrive）上传」整体迁移至 **GitHub + jsDelivr**。
+> 不再使用 netdrive(tdrive) 连接器的 `dir_list` / `file_upload` / `file_upload_complete`。
+> - **写入**：一律走 `git`（PAT 克隆/拉取 → 提交 → 推送）。
+> - **读取**：一律走 jsDelivr：`https://cdn.jsdelivr.net/gh/william-smith/zhangting-guilv-self-learning@master/<path>`。
+> - jsDelivr 是**只读 CDN**，不能用于上传；上传只能 git push。
 
 ---
 
-## Step 1 确认本地产物已生成
+## 仓库与工作目录
 
-脚本的 `WORKDIR = 脚本自身所在目录`，产物直接写到**脚本同步根目录**（即网盘根 `QknZxBQNxaGn`
-的本地同步副本，例如 `/workspace` 或你的同步根）。
+- 仓库：`https://github.com/william-smith/zhangting-guilv-self-learning`
+- 本地工作副本（首次 clone，之后 pull）：`REPO=<本地仓库目录>`（各 `.py` 脚本即位于此，`WORKDIR=脚本自身所在目录`）。
+- 注意：仓库内 `gitignore` 文件**不带前导点**，故不会被 git 当作忽略规则；
+  `git add -A` 会纳入全部产物（含 `candidates_*.json/md`、`review_*.md`、`rules.json`、`history.jsonl`）。
+  如需让该文件生效（忽略这些产物），请明确指示后再改名 `.gitignore` 并处理已跟踪文件。
+
+---
+
+## ★ Step 0 前置（git / 网络探针，必做）
 
 ```bash
-SYNC_DIR=<脚本同步根目录>   # 各 .py 文件所在目录，与网盘根 QknZxBQNxaGn 对应
-ls -l "$SYNC_DIR/candidates_$(date +%F).md" "$SYNC_DIR/candidates_$(date +%F).json"
+# 清空代理变量（否则直连 github:443 会被代理卡死）
+unset HTTPS_PROXY HTTP_PROXY ALL_PROXY https_proxy http_proxy all_proxy
+export GIT_TERMINAL_PROMPT=0   # 无头环境禁用交互凭据
+GIT="<git 路径>"   # WorkBuddy 自带：C:/Users/86136/.workbuddy/binaries/PortableGit/versions/1.3.0/cmd/git.exe
+PAT="<github_pat_...>"   # 具备该仓库写权限的 PAT
+REPO="<本地仓库目录>"
 ```
+校验 `git --version` 可用；网络不通时**禁止继续**，输出明确告警（含「任务产物推送失败」字样），不得静默结束。
 
-两文件必须存在且 `size > 0`；否则先跑 `python3 screen_open.py`（内置非交易日跳过逻辑）。
+---
 
-## Step 2 定位项目盘目标目录
+## Step 1 拉取最新仓库（保证取数状态最新）
 
-上传目标为**根目录**，无需再查找 `cache` 子目录：
+```bash
+if [ ! -d "$REPO/.git" ]; then
+  "$GIT" -c http.sslBackend=openssl clone \
+    "https://${PAT}@github.com/william-smith/zhangting-guilv-self-learning.git" "$REPO"
+else
+  "$GIT" -C "$REPO" -c http.sslBackend=openssl pull \
+    "https://${PAT}@github.com/william-smith/zhangting-guilv-self-learning.git" HEAD:master
+fi
+```
+`pull` 确保 `rules.json` / `history.jsonl` / `sector_cache.json` / `last_board.json` 等取数状态为最新。
 
-`tdrive.dir_list(dir_id="QknZxBQNxaGn")` → 直接使用根目录 `dir_id = QknZxBQNxaGn` 作为上传目标。
+## Step 2 确认本地产物已生成
 
-（原 `cache` 子目录 `QjMEDRBpayWp` 已删除，请勿再引用。）
+在 `$REPO` 内运行脚本（内置非交易日跳过逻辑）：
 
-## Step 3 逐文件上传（md、json 各一次）
+- 开盘前：`python3 screen_open.py` → 生成 `candidates_$(date +%F).md` 与 `.json`。
+- 收盘后：`python3 review_close.py` → 更新 `rules.json`、追加 `history.jsonl`、生成 `review_$(date +%F).md`。
 
-对 `candidates_YYYY-MM-DD.md` 与 `.json` 分别执行：
+产物必须存在且 `size > 0`；否则本次结束并告警。
 
-1. `tdrive.file_upload(dir_id="QknZxBQNxaGn", file_name, file_size, conflict_strategy="overwrite")`
-   → 返回 `domain` / `path` / `headers` / `confirm_key` / `task_id`。
-2. shell 用 curl 流式 PUT 上传本地文件，**原样**带上返回的所有 headers：
-   ```bash
-   curl -sSL -X PUT -T "$SYNC_DIR/<file>" \
-     -H "Authorization: <返回>" -H "Cache-Control: ..." -H "Content-Type: ..." \
-     -H "x-cos-acl: default" -H "x-cos-crc32c-flag: cosn" \
-     -H "x-cos-security-token: <返回>" -H "x-cos-storage-class: INTELLIGENT_TIERING" \
-     "https://<domain><path>" -w "\nHTTP_CODE=%{http_code}\n"
-   ```
-   - ⚠ **不要额外加 `Host` 头**（会让 COS 签名不匹配 → `InvalidAccessKeyId`）。
-   - ⚠ 路径前缀必须照抄返回值 `smh2mf8nq7i9cemv`，**别打成 `sm2…`**（→ `SignatureDoesNotMatch`）。
-   - ⚠ 用 `-T` 读文件流式上传；不要把路径字符串当 body（`--data-binary "/path"` 会存成路径文本）。
-   - 校验返回 `HTTP_CODE=200`。
-3. `tdrive.file_upload_complete(dir_id="QknZxBQNxaGn", file_name, file_size, confirm_key, task_id)` → 落库。
-4. 临时凭证约 2h 过期且一次性，**每张文件重新 `file_upload` 取新凭证，勿复用旧 URL**。
+## Step 3 提交并推送（取代原网盘上传）
 
-## Step 4 上传校验（必做）
+```bash
+cd "$REPO"
+"$GIT" -c http.sslBackend=openssl add -A
+"$GIT" -c http.sslBackend=openssl -c user.email="bot@workbuddy.local" -c user.name="WorkBuddy" \
+  commit -m "候选/复盘 $(date +%F)：自动发布到 GitHub"
+"$GIT" -c http.sslBackend=openssl push \
+  "https://${PAT}@github.com/william-smith/zhangting-guilv-self-learning.git" HEAD:master
+```
+校验退出码 = 0；任一步失败 → 明确输出「任务产物推送失败」+ 原因，禁止静默结束。
 
-重新 `tdrive.dir_list(dir_id="QknZxBQNxaGn")`，确认 `candidates_YYYY-MM-DD.{md,json}`
-均已存在且 `size > 0`。任一缺失/为空 → 重新生成并重传一次；重试仍失败 →
-输出明确失败告警（含「**任务①产物上传失败**」字样 + 原因），不得静默结束。
+## Step 4 推送校验 + 下游读取地址
+
+- 校验：`"$GIT" -C "$REPO" ls-files | grep "$(date +%F)"` 确认新文件已跟踪；或用
+  `gh api repos/william-smith/zhangting-guilv-self-learning/contents/candidates_$(date +%F).md` 确认存在。
+- 下游读取（jsDelivr，约 10 分钟 CDN 缓存；要强一致可用 commit hash 或手动 purge）：
+  - `https://cdn.jsdelivr.net/gh/william-smith/zhangting-guilv-self-learning@master/candidates_$(date +%F).md`
+  - `https://cdn.jsdelivr.net/gh/william-smith/zhangting-guilv-self-learning@master/candidates_$(date +%F).json`
+  - `https://cdn.jsdelivr.net/gh/william-smith/zhangting-guilv-self-learning@master/review_$(date +%F).md`
+
+---
 
 ## 旧产物清理
 
-- 本地同步根目录：删除文件名日期 `< 今天` 的 `candidates_*.{md,json}`；保留 `review_*.md`、`rules.json`、`history.jsonl` 等。
-- 项目盘根目录：默认保留历史候选作对照，需清理时单独确认后再 `tdrive.file_delete`。
+- 本地：可保留近期 7 天对照，`find "$REPO" -maxdepth 1 -name 'candidates_*.{md,json}' -mtime +7 -delete`。
+- 仓库：git 保留全部提交历史，无需手动删云端文件（如需裁剪历史另议）。
 
 ## 踩坑记录
 
-- 2026-09-18 早：netdrive 未连接 → 云上传失败，仅落本地；晚连接器恢复后重传成功。
-- 2026-09-18 晚：多带 `Host` 头 / 路径 `sm2` 笔误 → 403，修正即通。
-- `upload.sh` 内含 2026-08-26 的**静态过期凭证**，已失效，**禁止再用**；正式上传一律走
-  `tdrive.file_upload` 动态临时凭证流程。
-- 2026-09-25：目录整理删除 `cache` 子目录，上传目标统一改为网盘根目录 `QknZxBQNxaGn`。
+- 2026-09-18：netdrive 未连接导致云上传失败 → 本次已整体迁移到 GitHub，不再依赖 netdrive。
+- 推送须 **清空代理变量 + `GIT_TERMINAL_PROMPT=0` + `http.sslBackend=openssl`**，否则卡死/挂起。
+- jsDelivr 为只读 CDN，**写入一律走 git push**；不要试图用 jsDelivr 上传。
+- 仓库内 `gitignore` 不带点、不生效；若改名 `.gitignore`，`candidates_*.{json,md}`、`review_*.md`、
+  `rules.json`、`history.jsonl` 将被忽略，与「全部材料入库」冲突，需谨慎。
