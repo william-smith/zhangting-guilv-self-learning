@@ -1,0 +1,40 @@
+# ╔══════════════════════════════════════════════════════════╗
+# ║ 任务①：开盘前候选筛选与发布（GitHub + jsDelivr 版）          ║
+# ║ 触发：每日 08:35（脚本内置非交易日跳过，无需额外判断）        ║
+# ║ 用法：把下方【Prompt 正文】整体替换原任务的网盘(tdrive)步骤    ║
+# ╚══════════════════════════════════════════════════════════╝
+
+# ── 通用前置（任务开头先执行）──
+REPO=<本地仓库工作副本目录>            # 各 .py 脚本所在目录，即仓库本地副本
+GIT=<git 路径>                        # 如 C:/Users/86136/.workbuddy/binaries/PortableGit/versions/1.3.0/cmd/git.exe
+PAT=${GH_PAT}                         # 调度器密钥变量，切勿明文写死
+REMOTE="https://${PAT}@github.com/william-smith/zhangting-guilv-self-learning.git"
+# 推送前必须：清空代理变量 + GIT_TERMINAL_PROMPT=0 + http.sslBackend=openssl
+unset HTTPS_PROXY HTTP_PROXY ALL_PROXY https_proxy http_proxy all_proxy
+export GIT_TERMINAL_PROMPT=0
+# 写入走 git push（jsDelivr 只读，不能上传）
+# 读取走 jsDelivr：https://cdn.jsdelivr.net/gh/william-smith/zhangting-guilv-self-learning@master/<path>
+
+# ── Prompt 正文（替换原网盘步骤）──
+1) 准备仓库：若 $REPO/.git 不存在则
+     $GIT -c http.sslBackend=openssl clone $REMOTE "$REPO"
+   否则
+     $GIT -C "$REPO" -c http.sslBackend=openssl pull $REMOTE HEAD:master
+   （pull 保证 rules.json / history.jsonl / sector_cache.json 等取数状态最新）
+
+2) 在 $REPO 内运行：python3 screen_open.py
+   确认生成 $REPO/candidates_$(date +%F).md 与 .json，且 size>0；否则告警并结束。
+
+3) 提交并推送（取代原 tdrive 上传）：
+     cd "$REPO"
+     $GIT -c http.sslBackend=openssl add -A
+     $GIT -c http.sslBackend=openssl -c user.email=bot@workbuddy.local -c user.name=WorkBuddy \
+       commit -m "候选 $(date +%F)：开盘前筛选产物"
+     $GIT -c http.sslBackend=openssl push $REMOTE HEAD:master
+   校验退出码=0；失败必须输出「任务①产物推送失败」+原因，禁止静默结束。
+
+4) 校验与下游地址：
+     $GIT -C "$REPO" ls-files | grep "$(date +%F)"
+     团队成员经 jsDelivr 读取：
+       https://cdn.jsdelivr.net/gh/william-smith/zhangting-guilv-self-learning@master/candidates_$(date +%F).md
+       https://cdn.jsdelivr.net/gh/william-smith/zhangting-guilv-self-learning@master/candidates_$(date +%F).json
