@@ -1,0 +1,3 @@
+# Python 字节码缓存（不应入库；定时任务 git add -A 时会被误纳入）
+__pycache__/
+*.pyc
