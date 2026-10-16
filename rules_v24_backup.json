@@ -1,0 +1,40 @@
+{
+  "version": 24,
+  "updated_at": "2026-09-15 15:42:03",
+  "candidate_count": 25,
+  "min_volume_ratio": 1.69,
+  "factors": {
+    "volume_ratio": {
+      "weight": 0.0271
+    },
+    "zt_gene": {
+      "weight": 0.1984
+    },
+    "breakout": {
+      "weight": 0.2115
+    },
+    "ma_bull": {
+      "weight": 0.1692
+    },
+    "strength": {
+      "weight": 0.2105
+    },
+    "small_cap": {
+      "weight": 0.0609
+    },
+    "turnover": {
+      "weight": 0.0608
+    },
+    "news_sentiment": {
+      "weight": 0.041
+    },
+    "news_heat": {
+      "weight": 0.0206
+    }
+  },
+  "filters": {
+    "min_close_price": 2.0,
+    "exclude_st": false,
+    "exclude_bj": true
+  }
+}

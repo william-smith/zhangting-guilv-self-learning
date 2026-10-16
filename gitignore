@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+codes_cache.json
+klines_cache.json
+candidates_*.json
+candidates_*.md
+review_*.md
+rules.json
+history.jsonl

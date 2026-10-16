@@ -1,0 +1,63 @@
+{
+  "version": 39,
+  "updated_at": "2026-10-16 16:01:34",
+  "candidate_count": 25,
+  "min_volume_ratio": 1.36,
+  "factors": {
+    "volume_ratio": {
+      "weight": 0.0262
+    },
+    "zt_gene": {
+      "weight": 0.229
+    },
+    "breakout": {
+      "weight": 0.2439
+    },
+    "ma_bull": {
+      "weight": 0.1952
+    },
+    "strength": {
+      "weight": 0.243
+    },
+    "small_cap": {
+      "weight": 0.0262
+    },
+    "turnover": {
+      "weight": 0.0266
+    },
+    "news_sentiment": {
+      "weight": 0.0067
+    },
+    "news_heat": {
+      "weight": 0.0033
+    },
+    "topic_effect": {
+      "weight": 0.0516
+    },
+    "block_effect": {
+      "weight": 0.0516
+    }
+  },
+  "filters": {
+    "min_close_price": 2.0,
+    "exclude_st": false,
+    "exclude_bj": true
+  },
+  "market": {
+    "emotion": {
+      "strong_at": 80,
+      "weak_at": 40,
+      "strong_M": 1.1,
+      "neutral_M": 1.0,
+      "weak_M": 0.9
+    },
+    "block": {
+      "min_limit_ups": 3,
+      "cap": 8
+    },
+    "topic": {
+      "min_topic_count": 2,
+      "cap": 6
+    }
+  }
+}
