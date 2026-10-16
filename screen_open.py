@@ -201,14 +201,15 @@ def main():
     print("\n报告: %s" % mpath)
     print("数据: %s" % jpath)
 
-    # ---- ❗ 上传提醒（重要：本地写盘 ≠ 网盘已上传）----
-    # 本地产物仅落在本地工作目录(WORKDIR=%s)。开盘前定时任务必须把它们推送至
-    # 项目资产网盘(tdrive)根目录 QknZxBQNxaGn(覆盖)，并以网盘 dir_list 命中且字节数>0
-    # 为完成判据。仅本地存在不代表已上传，收盘后复盘任务在网盘上找不到即视为缺失。
-    print("\n[上传提醒] 本地产物: %s" % mpath)
-    print("[上传提醒]   %s" % jpath)
-    print("[上传提醒] ⚠️ 必须由 agent 通过项目网盘(tdrive)通道上传到根目录 QknZxBQNxaGn，")
-    print("[上传提醒]   以网盘 dir_list 能查到且大小>0 才算完成。本地存在 ≠ 网盘已上传。")
+    # ---- ❗ 发布提醒（重要：本地写盘 ≠ 已发布到 GitHub）----
+    # 本地产物仅落在本地工作目录(WORKDIR=%s，即仓库本地副本)。开盘前定时任务必须把它们提交并推送至
+    # GitHub 仓库 william-smith/zhangting-guilv-self-learning（git add -A && commit && push，PAT 认证），
+    # 下游经 jsDelivr 读取：https://cdn.jsdelivr.net/gh/william-smith/zhangting-guilv-self-learning@master/<文件>。
+    # 仅本地存在不代表已发布，收盘后复盘任务在仓库/jsDelivr 上找不到即视为缺失。
+    print("\n[发布提醒] 本地产物: %s" % mpath)
+    print("[发布提醒]   %s" % jpath)
+    print("[发布提醒] ⚠️ 必须由定时任务通过 git 推送至 GitHub 仓库 william-smith/zhangting-guilv-self-learning，")
+    print("[发布提醒]   推送成功且 jsDelivr 可访问才算完成。本地存在 ≠ 已发布。")
 
 
 if __name__ == "__main__":
