@@ -8,7 +8,7 @@ OWNER=william-smith
 REPO_NAME=zhangting-guilv-self-learning
 BRANCH=master
 
-# PAT 自动调取：①调度器密钥变量 ②沙箱安全文件（仅供 git 兜底路径使用；首选推送走 GitHub 连接器，无需 PAT）
+# PAT 自动调取：①调度器密钥变量 ②沙箱安全文件（git 首选推送通道的认证凭据，实测可用）
 if [ -z "${GH_PAT:-}" ] && [ -r /root/.config/zt/gh_pat ]; then GH_PAT="$(cat /root/.config/zt/gh_pat 2>/dev/null)"; fi
 PAT="${GH_PAT:-}"
 
@@ -21,6 +21,8 @@ SSLARG="-c http.sslBackend=openssl"
 
 注：仓库为公开扁平结构，screen_open.py 与 candidates_*.md/json 均在根目录；jsDelivr 只读，仅作拉取/读取备选；
 推送唯一真源为 GitHub master，沙箱本地仅临时产物。
+推送通道优先级：① PAT/git push（实测可用，首选）→ ② GitHub 连接器 push_files（当前对本仓库只读、
+写返回 403，仅作兜底；待连接器写入权限开通后可改回首选）→ ③ Contents API（PAT 认证）。
 
 ── 执行步骤 ──
 
@@ -46,20 +48,21 @@ SSLARG="-c http.sslBackend=openssl"
      用通达信连接器交叉验证——tdx_screener(message="涨停") 核对上一交易日涨停池、
      tdx_quotes 抽查 Top 候选代码行情是否真实存在；在最终汇报中说明数据源状态与影响；严禁编造行情数字。
 
-3) 推送（首选 GitHub 连接器；PAT/git 兜底；沙箱本地非真源）：
+3) 推送（PAT/git 首选；连接器兜底；沙箱本地非真源）：
    先确定待推送文件：cd "$REPO" && git status --porcelain（无 .git 时跳过此检查）。
    除 candidates_$(date +%F).md/.json 外，若 rules.json 等已跟踪文件被修改（版本迁移）一并推送；
    未跟踪的缓存文件（codes_cache.json / klines_cache.json / trade_calendar.json / 新闻缓存等）不推送。
-   ① 首选 GitHub 连接器：调用 mcp__github__push_files，owner="william-smith"、
+   ① 首选 PAT/git：cd "$REPO" && "$GIT" $SSLARG add -A &&
+      "$GIT" $SSLARG -c user.email=bot@workbuddy.local -c user.name=WorkBuddy commit -m "候选 $(date +%F)：开盘前筛选产物" &&
+      "$GIT" $SSLARG push "$REMOTE" HEAD:master
+   ② 兜底1（PAT 不可用或 git 推送失败）：调用 GitHub 连接器 mcp__github__push_files，owner="william-smith"、
       repo="zhangting-guilv-self-learning"、branch="master"，files 为上述文件的
       [{path, content}] 数组，content 取本地文件全文（原样文本，无需 base64，连接器自动编码），
       message="候选 $(date +%F)：开盘前筛选产物"。
-   ② 兜底1（连接器失败且 PAT 非空）：cd "$REPO" && "$GIT" $SSLARG add -A &&
-      "$GIT" $SSLARG -c user.email=bot@workbuddy.local -c user.name=WorkBuddy commit -m "候选 $(date +%F)：开盘前筛选产物" &&
-      "$GIT" $SSLARG push "$REMOTE" HEAD:master
-   ③ 兜底2（$REPO 无 .git 走了 jsDelivr 兜底、或 git 亦失败）：用 python 调 GitHub Contents API
+      注：该连接器当前对本仓库仅只读权限（写返回 403），此路径待其写入权限开通后才可能成功。
+   ③ 兜底2（$REPO 无 .git 走了 jsDelivr 兜底、或前两路均失败）：用 python 调 GitHub Contents API
       直传根目录（PUT /repos/william-smith/zhangting-guilv-self-learning/contents/<文件名>，
-      body 含 message、branch=master、base64 内容；文件已存在时先 GET 取 sha 并带上）。
+      body 含 message、branch=master、base64 内容；文件已存在时先 GET 取 sha 并带上；用 PAT 认证）。
    任一路径成功即通过；全部失败必须输出「任务①产物推送失败」+原因，禁止静默结束。
 
 4) 校验与下游地址：
