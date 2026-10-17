@@ -8,8 +8,10 @@ OWNER=william-smith
 REPO_NAME=zhangting-guilv-self-learning
 BRANCH=master
 
-# PAT 自动调取：①调度器密钥变量 ②沙箱安全文件（git 首选推送通道的认证凭据，实测可用）
-if [ -z "${GH_PAT:-}" ] && [ -r /root/.config/zt/gh_pat ]; then GH_PAT="$(cat /root/.config/zt/gh_pat 2>/dev/null)"; fi
+# PAT 取用：①本任务内置明文（首选）→ ②沙箱安全文件兜底（git 首选推送通道的认证凭据）
+# 注：本文件为公开仓库文档，PAT 以占位符呈现；明文仅存于调度器任务 #12649265 配置中。
+GH_PAT="<见调度器任务配置>"
+[ -z "$GH_PAT" ] && [ -r /root/.config/zt/gh_pat ] && GH_PAT="$(cat /root/.config/zt/gh_pat 2>/dev/null)"
 PAT="${GH_PAT:-}"
 
 unset HTTPS_PROXY HTTP_PROXY ALL_PROXY https_proxy http_proxy all_proxy
