@@ -63,7 +63,7 @@ def main():
         lp = C.limit_pct(n, c)
         if (sp.get("chg_pct", 0) or 0) >= lp * 100 - 0.2:
             actual_zt.append(c)
-    print("全市场实际涨停 %d 只" % len(actual_zt))
+    print("全市场涨幅≥10%%(不要求封板) %d 只" % len(actual_zt))
 
     # ---- 市场维度(v25): 抓当日涨停板(题材/板块/情绪) -> 写 last_board.json 供次日盘前使用 ----
     mkt_idx = None
@@ -103,12 +103,17 @@ def main():
     non_c = [comps_of(c) for c in (miss_top + leak) if comps_of(c)]
 
     # 当日已复盘则跳过学习，避免重复写入/重复跳版
+    # done_today 时规则已是"学习后"版本, 报告需展示当日真实演进(v前→v后),
+    # 故从 history 当日记录取学习前的 rule_version 作为起始版本。
     done_today = False
+    base_version = None
     if os.path.exists(C.HISTORY_FILE):
         for line in open(C.HISTORY_FILE, encoding="utf-8"):
             try:
-                if json.loads(line).get("date") == datestr:
+                rec = json.loads(line)
+                if rec.get("date") == datestr:
                     done_today = True
+                    base_version = rec.get("rule_version")
                     break
             except Exception:
                 continue
@@ -137,9 +142,11 @@ def main():
     # ---- 写 MD ----
     lines = []
     lines.append("# 收盘复盘 + 规律自学习 %s\n" % datestr)
-    lines.append("- 早盘候选：**%d** 只 ｜ 全市场实际涨停：**%d** 只" % (len(cand_codes), len(actual_zt)))
+    lines.append("- 早盘候选：**%d** 只 ｜ 全市场涨幅≥10%%(不要求封板)：**%d** 只" % (len(cand_codes), len(actual_zt)))
     lines.append("- 命中：**%d** 只 ｜ 精确率 **%.1f%%** ｜ 召回率 **%.1f%%**" % (len(hits), precision * 100, recall * 100))
-    lines.append("- 规则版本：v%s → v%s" % (rules.get("version"), new_rules.get("version")))
+    lines.append("- 规则版本：v%s → v%s" % (
+        base_version if done_today else rules.get("version"),
+        new_rules.get("version")))
     lines.append("- 信息面覆盖：新浪新闻命中 **%d** 只个股；命中股中带利好催化 **%d** 只" % (len(news_map), len(news_hit_codes)))
     if hits:
         lines.append("## 命中个股\n")
