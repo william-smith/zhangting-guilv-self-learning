@@ -1,216 +1,275 @@
 {
- "date": "2026-09-15",
- "records": [
-  {
-   "code": "688004",
-   "name": "博汇科技",
-   "reason": "",
-   "chg": 19.982
-  },
-  {
-   "code": "002522",
-   "name": "浙江众成",
-   "reason": "",
-   "chg": 10.038
-  },
-  {
-   "code": "002585",
-   "name": "双星新材",
-   "reason": "",
-   "chg": 10.036
-  },
-  {
-   "code": "002631",
-   "name": "德尔未来",
-   "reason": "",
-   "chg": 10.022
-  },
-  {
-   "code": "000993",
-   "name": "闽东电力",
-   "reason": "",
-   "chg": 10.02
-  },
-  {
-   "code": "002912",
-   "name": "中新赛克",
-   "reason": "",
-   "chg": 10.015
-  },
-  {
-   "code": "603090",
-   "name": "宏盛股份",
-   "reason": "",
-   "chg": 10.014
-  },
-  {
-   "code": "002487",
-   "name": "大金重工",
-   "reason": "",
-   "chg": 10.014
-  },
-  {
-   "code": "002232",
-   "name": "启明信息",
-   "reason": "",
-   "chg": 10.013
-  },
-  {
-   "code": "002584",
-   "name": "西陇科学",
-   "reason": "",
-   "chg": 10.013
-  },
-  {
-   "code": "603248",
-   "name": "锡华科技",
-   "reason": "",
-   "chg": 10.012
-  },
-  {
-   "code": "603353",
-   "name": "和顺石油",
-   "reason": "",
-   "chg": 10.008
-  },
-  {
-   "code": "603082",
-   "name": "北自科技",
-   "reason": "",
-   "chg": 10.005
-  },
-  {
-   "code": "603200",
-   "name": "上海洗霸",
-   "reason": "",
-   "chg": 10.003
-  },
-  {
-   "code": "603186",
-   "name": "华正新材",
-   "reason": "",
-   "chg": 10.0
-  },
-  {
-   "code": "605162",
-   "name": "新中港",
-   "reason": "",
-   "chg": 10.0
-  },
-  {
-   "code": "002531",
-   "name": "天顺风能",
-   "reason": "",
-   "chg": 10.0
-  },
-  {
-   "code": "003026",
-   "name": "中晶科技",
-   "reason": "",
-   "chg": 10.0
-  },
-  {
-   "code": "601579",
-   "name": "会稽山",
-   "reason": "",
-   "chg": 9.996
-  },
-  {
-   "code": "002213",
-   "name": "大为股份",
-   "reason": "",
-   "chg": 9.996
-  },
-  {
-   "code": "001223",
-   "name": "欧克科技",
-   "reason": "",
-   "chg": 9.995
-  },
-  {
-   "code": "002491",
-   "name": "通鼎互联",
-   "reason": "",
-   "chg": 9.995
-  },
-  {
-   "code": "002362",
-   "name": "汉王科技",
-   "reason": "",
-   "chg": 9.994
-  },
-  {
-   "code": "603266",
-   "name": "天龙股份",
-   "reason": "",
-   "chg": 9.993
-  },
-  {
-   "code": "002882",
-   "name": "金龙羽",
-   "reason": "",
-   "chg": 9.991
-  },
-  {
-   "code": "605058",
-   "name": "澳弘电子",
-   "reason": "",
-   "chg": 9.989
-  },
-  {
-   "code": "605507",
-   "name": "国邦医药",
-   "reason": "",
-   "chg": 9.988
-  },
-  {
-   "code": "601218",
-   "name": "吉鑫科技",
-   "reason": "",
-   "chg": 9.979
-  },
-  {
-   "code": "600110",
-   "name": "诺德股份",
-   "reason": "",
-   "chg": 9.973
-  },
-  {
-   "code": "001216",
-   "name": "华瓷股份",
-   "reason": "",
-   "chg": 9.973
-  },
-  {
-   "code": "600163",
-   "name": "中闽能源",
-   "reason": "",
-   "chg": 9.965
-  },
-  {
-   "code": "002846",
-   "name": "英联股份",
-   "reason": "",
-   "chg": 9.962
-  }
- ],
- "index": {
+  "date": "2026-10-19",
+  "total": 66,
+  "emotion_M": 1.0,
+  "boards": {},
   "topics": {},
-  "blocks": {
-   "化工": 3,
-   "家具行业": 1,
-   "电力": 4,
-   "有色": 1,
-   "电子": 4,
-   "风电": 1,
-   "消费零售": 1,
-   "汽车": 1,
-   "医药": 1,
-   "机器人": 1,
-   "造纸行业": 1
+  "stocks": {
+    "600032": {
+      "industry": "",
+      "concepts": []
+    },
+    "600148": {
+      "industry": "",
+      "concepts": []
+    },
+    "600178": {
+      "industry": "",
+      "concepts": []
+    },
+    "600267": {
+      "industry": "",
+      "concepts": []
+    },
+    "600329": {
+      "industry": "",
+      "concepts": []
+    },
+    "600370": {
+      "industry": "",
+      "concepts": []
+    },
+    "600487": {
+      "industry": "",
+      "concepts": []
+    },
+    "600686": {
+      "industry": "",
+      "concepts": []
+    },
+    "600860": {
+      "industry": "",
+      "concepts": []
+    },
+    "601778": {
+      "industry": "",
+      "concepts": []
+    },
+    "603040": {
+      "industry": "",
+      "concepts": []
+    },
+    "603119": {
+      "industry": "",
+      "concepts": []
+    },
+    "603188": {
+      "industry": "",
+      "concepts": []
+    },
+    "603197": {
+      "industry": "",
+      "concepts": []
+    },
+    "603278": {
+      "industry": "",
+      "concepts": []
+    },
+    "603286": {
+      "industry": "",
+      "concepts": []
+    },
+    "603330": {
+      "industry": "",
+      "concepts": []
+    },
+    "603337": {
+      "industry": "",
+      "concepts": []
+    },
+    "603348": {
+      "industry": "",
+      "concepts": []
+    },
+    "603378": {
+      "industry": "",
+      "concepts": []
+    },
+    "603626": {
+      "industry": "",
+      "concepts": []
+    },
+    "603693": {
+      "industry": "",
+      "concepts": []
+    },
+    "603859": {
+      "industry": "",
+      "concepts": []
+    },
+    "605058": {
+      "industry": "",
+      "concepts": []
+    },
+    "605255": {
+      "industry": "",
+      "concepts": []
+    },
+    "605258": {
+      "industry": "",
+      "concepts": []
+    },
+    "605488": {
+      "industry": "",
+      "concepts": []
+    },
+    "688121": {
+      "industry": "",
+      "concepts": []
+    },
+    "688322": {
+      "industry": "",
+      "concepts": []
+    },
+    "688507": {
+      "industry": "",
+      "concepts": []
+    },
+    "688582": {
+      "industry": "",
+      "concepts": []
+    },
+    "688787": {
+      "industry": "",
+      "concepts": []
+    },
+    "688836": {
+      "industry": "",
+      "concepts": []
+    },
+    "000576": {
+      "industry": "",
+      "concepts": []
+    },
+    "000826": {
+      "industry": "",
+      "concepts": []
+    },
+    "001211": {
+      "industry": "",
+      "concepts": []
+    },
+    "001216": {
+      "industry": "",
+      "concepts": []
+    },
+    "001323": {
+      "industry": "",
+      "concepts": []
+    },
+    "002085": {
+      "industry": "",
+      "concepts": []
+    },
+    "002164": {
+      "industry": "",
+      "concepts": []
+    },
+    "002207": {
+      "industry": "",
+      "concepts": []
+    },
+    "002343": {
+      "industry": "",
+      "concepts": []
+    },
+    "002368": {
+      "industry": "",
+      "concepts": []
+    },
+    "002514": {
+      "industry": "",
+      "concepts": []
+    },
+    "002626": {
+      "industry": "",
+      "concepts": []
+    },
+    "002724": {
+      "industry": "",
+      "concepts": []
+    },
+    "002886": {
+      "industry": "",
+      "concepts": []
+    },
+    "002889": {
+      "industry": "",
+      "concepts": []
+    },
+    "002929": {
+      "industry": "",
+      "concepts": []
+    },
+    "003021": {
+      "industry": "",
+      "concepts": []
+    },
+    "003029": {
+      "industry": "",
+      "concepts": []
+    },
+    "300096": {
+      "industry": "",
+      "concepts": []
+    },
+    "300152": {
+      "industry": "",
+      "concepts": []
+    },
+    "300411": {
+      "industry": "",
+      "concepts": []
+    },
+    "300798": {
+      "industry": "",
+      "concepts": []
+    },
+    "300852": {
+      "industry": "",
+      "concepts": []
+    },
+    "300911": {
+      "industry": "",
+      "concepts": []
+    },
+    "300916": {
+      "industry": "",
+      "concepts": []
+    },
+    "301117": {
+      "industry": "",
+      "concepts": []
+    },
+    "301119": {
+      "industry": "",
+      "concepts": []
+    },
+    "301190": {
+      "industry": "",
+      "concepts": []
+    },
+    "301313": {
+      "industry": "",
+      "concepts": []
+    },
+    "301529": {
+      "industry": "",
+      "concepts": []
+    },
+    "301550": {
+      "industry": "",
+      "concepts": []
+    },
+    "301591": {
+      "industry": "",
+      "concepts": []
+    },
+    "301666": {
+      "industry": "",
+      "concepts": []
+    }
   },
-  "total": 32
- },
- "updated": "2026-09-15 23:28:00",
- "note": "由新浪涨幅榜补建(东财在构建环境不可达); 无涨停原因字段, 故 topics 为空; 板块名已归一化"
+  "hot_boards": [],
+  "hot_topics": []
 }
