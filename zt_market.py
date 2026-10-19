@@ -245,10 +245,12 @@ def emotion_multiplier(mkt_idx, rules):
     return float(mkt_idx.get("emotion_M", 1.0)) or 1.0
 
 
-def score_with_market(f, sp, rules, code=None, name=None, mkt_idx=None):
-    """向后兼容包装：直接复用 zt_common.score_stock（comps 由其统一产出）。"""
+def score_with_market(f, sp, rules, news=None, code=None, name=None, mkt_idx=None):
+    """向后兼容包装：直接复用 zt_common.score_stock（comps 由其统一产出）。
+    news: 个股信息面因子字典(可空)，需透传给 score_stock 参与 news_sentiment/news_heat 子分。
+    """
     import zt_common as C
-    return C.score_stock(f, sp, rules, code=code, name=name, mkt_idx=mkt_idx)
+    return C.score_stock(f, sp, rules, news=news, code=code, name=name, mkt_idx=mkt_idx)
 
 
 def review_market_report(mkt_idx, cand_codes, rules):
