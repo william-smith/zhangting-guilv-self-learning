@@ -1,35 +1,35 @@
 {
-  "version": 41,
-  "updated_at": "2026-10-20 15:40:59",
+  "version": 42,
+  "updated_at": "2026-10-21 15:45:51",
   "candidate_count": 25,
-  "min_volume_ratio": 1.29,
+  "min_volume_ratio": 1.23,
   "factors": {
     "volume_ratio": {
       "weight": 0.0261
     },
     "zt_gene": {
-      "weight": 0.2296
+      "weight": 0.2299
     },
     "breakout": {
-      "weight": 0.2445
+      "weight": 0.2448
     },
     "ma_bull": {
-      "weight": 0.1957
+      "weight": 0.196
     },
     "strength": {
-      "weight": 0.2436
+      "weight": 0.2439
     },
     "small_cap": {
-      "weight": 0.0262
+      "weight": 0.0261
     },
     "turnover": {
       "weight": 0.0266
     },
     "news_sentiment": {
-      "weight": 0.005
+      "weight": 0.0044
     },
     "news_heat": {
-      "weight": 0.0025
+      "weight": 0.0022
     },
     "topic_effect": {
       "weight": 0.0516
