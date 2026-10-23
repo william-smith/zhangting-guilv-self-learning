@@ -40,6 +40,28 @@ DEFAULT_RULES = {
 import requests
 
 
+def _bootstrap_ssl_ca():
+    """SSL/TLS 根证书自愈（2026-10-23 修复）。
+
+    部分运行环境存在 TLS 拦截代理，Python 自带的 certifi 证书包不含该代理的根证书，
+    联网时会抛 CERTIFICATE_VERIFY_FAILED，导致 akshare 交易日历等步骤全部失败，
+    进而使 is_trade_day() 降级走蓝筹 K 线兜底探测，可能把交易日误判为非交易日
+    （实例：2026-10-23 周五被误判非交易日，全天筛选被跳过且无任何产物）。
+
+    此处在检测到系统 CA 包存在时，将其设为 requests/urllib3 的证书来源，从根上消除该误判。
+    仅在类 Unix 环境生效；Windows/macOS 无此路径时行为完全不变。
+    用 setdefault，不覆盖用户已显式配置的证书路径。
+    """
+    for _p in ("/etc/ssl/certs/ca-certificates.crt", "/etc/pki/tls/certs/ca-bundle.crt"):
+        if os.path.exists(_p):
+            for _k in ("SSL_CERT_FILE", "REQUESTS_CA_BUNDLE", "CURL_CA_BUNDLE"):
+                os.environ.setdefault(_k, _p)
+            break
+
+
+_bootstrap_ssl_ca()
+
+
 def ensure_deps():
     try:
         import akshare  # noqa
