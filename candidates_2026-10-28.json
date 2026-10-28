@@ -1,0 +1,282 @@
+{
+  "date": "2026-10-28",
+  "rule_version": 46,
+  "news_coverage": 52,
+  "candidates": [
+    {
+      "rank": 1,
+      "code": "301314",
+      "name": "科瑞思",
+      "score": 0.9988,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 2,
+      "code": "002724",
+      "name": "海洋王",
+      "score": 0.979,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 3,
+      "code": "000678",
+      "name": "襄阳轴承",
+      "score": 0.9714,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 4,
+      "code": "603278",
+      "name": "大业股份",
+      "score": 0.9331,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 5,
+      "code": "301502",
+      "name": "华阳智能",
+      "score": 0.9193,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 6,
+      "code": "600785",
+      "name": "新华百货",
+      "score": 0.9051,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 7,
+      "code": "605488",
+      "name": "福莱新材",
+      "score": 0.8937,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 8,
+      "code": "688071",
+      "name": "华依科技",
+      "score": 0.8647,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 9,
+      "code": "603037",
+      "name": "凯众股份",
+      "score": 0.8446,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 10,
+      "code": "600865",
+      "name": "百大集团",
+      "score": 0.8362,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 11,
+      "code": "002242",
+      "name": "九阳股份",
+      "score": 0.829,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 12,
+      "code": "605333",
+      "name": "沪光股份",
+      "score": 0.8281,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 13,
+      "code": "603370",
+      "name": "华新精科",
+      "score": 0.8192,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 14,
+      "code": "300949",
+      "name": "奥雅股份",
+      "score": 0.8121,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 15,
+      "code": "002249",
+      "name": "大洋电机",
+      "score": 0.7995,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 16,
+      "code": "600826",
+      "name": "兰生股份",
+      "score": 0.7879,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 17,
+      "code": "002820",
+      "name": "桂发祥",
+      "score": 0.7822,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 18,
+      "code": "601956",
+      "name": "东贝集团",
+      "score": 0.7672,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 19,
+      "code": "300539",
+      "name": "横河精密",
+      "score": 0.765,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 20,
+      "code": "301479",
+      "name": "弘景光电",
+      "score": 0.7644,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 21,
+      "code": "603286",
+      "name": "日盈电子",
+      "score": 0.7634,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 22,
+      "code": "600094",
+      "name": "大名城",
+      "score": 0.7576,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 23,
+      "code": "603138",
+      "name": "海量数据",
+      "score": 0.7533,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 24,
+      "code": "603089",
+      "name": "正裕工业",
+      "score": 0.7525,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 25,
+      "code": "603337",
+      "name": "杰克科技",
+      "score": 0.7523,
+      "news": 0.5,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    }
+  ]
+}
