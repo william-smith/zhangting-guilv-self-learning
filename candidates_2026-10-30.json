@@ -1,0 +1,282 @@
+{
+  "date": "2026-10-30",
+  "rule_version": 48,
+  "news_coverage": 46,
+  "candidates": [
+    {
+      "rank": 1,
+      "code": "600715",
+      "name": "文投控股",
+      "score": 0.997,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 2,
+      "code": "002086",
+      "name": "东方海洋",
+      "score": 0.9722,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 3,
+      "code": "603278",
+      "name": "大业股份",
+      "score": 0.9718,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 4,
+      "code": "002724",
+      "name": "海洋王",
+      "score": 0.9704,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 5,
+      "code": "002242",
+      "name": "九阳股份",
+      "score": 0.9332,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 6,
+      "code": "002708",
+      "name": "光洋股份",
+      "score": 0.9172,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 7,
+      "code": "000678",
+      "name": "襄阳轴承",
+      "score": 0.9108,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 8,
+      "code": "002164",
+      "name": "宁波东力",
+      "score": 0.8911,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 9,
+      "code": "301529",
+      "name": "福赛科技",
+      "score": 0.8855,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 10,
+      "code": "601188",
+      "name": "龙江交通",
+      "score": 0.8819,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 11,
+      "code": "600592",
+      "name": "龙溪股份",
+      "score": 0.8797,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 12,
+      "code": "605488",
+      "name": "福莱新材",
+      "score": 0.877,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 13,
+      "code": "002696",
+      "name": "百洋股份",
+      "score": 0.86,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 14,
+      "code": "600261",
+      "name": "阳光照明",
+      "score": 0.8478,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 15,
+      "code": "300949",
+      "name": "奥雅股份",
+      "score": 0.8435,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 16,
+      "code": "603131",
+      "name": "上海沪工",
+      "score": 0.8421,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 17,
+      "code": "603337",
+      "name": "杰克科技",
+      "score": 0.8169,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 18,
+      "code": "603626",
+      "name": "科森科技",
+      "score": 0.8152,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 19,
+      "code": "600501",
+      "name": "航天晨光",
+      "score": 0.8139,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 20,
+      "code": "301428",
+      "name": "世纪恒通",
+      "score": 0.7874,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 21,
+      "code": "600838",
+      "name": "上海九百",
+      "score": 0.7859,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 22,
+      "code": "000701",
+      "name": "厦门信达",
+      "score": 0.7714,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 23,
+      "code": "301313",
+      "name": "凡拓数创",
+      "score": 0.7641,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 24,
+      "code": "002347",
+      "name": "泰尔股份",
+      "score": 0.7587,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 25,
+      "code": "301446",
+      "name": "福事特",
+      "score": 0.7473,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    }
+  ]
+}
