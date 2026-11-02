@@ -1,0 +1,282 @@
+{
+  "date": "2026-11-02",
+  "rule_version": 49,
+  "news_coverage": 50,
+  "candidates": [
+    {
+      "rank": 1,
+      "code": "002086",
+      "name": "东方海洋",
+      "score": 0.972,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 2,
+      "code": "002724",
+      "name": "海洋王",
+      "score": 0.9568,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 3,
+      "code": "603278",
+      "name": "大业股份",
+      "score": 0.9528,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 4,
+      "code": "002164",
+      "name": "宁波东力",
+      "score": 0.8758,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 5,
+      "code": "605488",
+      "name": "福莱新材",
+      "score": 0.8347,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 6,
+      "code": "002242",
+      "name": "九阳股份",
+      "score": 0.8159,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 7,
+      "code": "688045",
+      "name": "必易微",
+      "score": 0.8145,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 8,
+      "code": "003032",
+      "name": "传智教育",
+      "score": 0.8119,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 9,
+      "code": "001400",
+      "name": "江顺科技",
+      "score": 0.8005,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 10,
+      "code": "300949",
+      "name": "奥雅股份",
+      "score": 0.7816,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 11,
+      "code": "605338",
+      "name": "巴比食品",
+      "score": 0.7683,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 12,
+      "code": "600289",
+      "name": "ST信通",
+      "score": 0.7632,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 13,
+      "code": "000678",
+      "name": "襄阳轴承",
+      "score": 0.7532,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 14,
+      "code": "002708",
+      "name": "光洋股份",
+      "score": 0.7499,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 15,
+      "code": "301529",
+      "name": "福赛科技",
+      "score": 0.7376,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 16,
+      "code": "301187",
+      "name": "欧圣电气",
+      "score": 0.7348,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 17,
+      "code": "301413",
+      "name": "安培龙",
+      "score": 0.7318,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 18,
+      "code": "600838",
+      "name": "上海九百",
+      "score": 0.7288,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 19,
+      "code": "300030",
+      "name": "阳普医疗",
+      "score": 0.7288,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 20,
+      "code": "301502",
+      "name": "华阳智能",
+      "score": 0.7259,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 21,
+      "code": "002696",
+      "name": "百洋股份",
+      "score": 0.7259,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 22,
+      "code": "301428",
+      "name": "世纪恒通",
+      "score": 0.7259,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 23,
+      "code": "688071",
+      "name": "华依科技",
+      "score": 0.7258,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 24,
+      "code": "301313",
+      "name": "凡拓数创",
+      "score": 0.7252,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    },
+    {
+      "rank": 25,
+      "code": "688787",
+      "name": "海天瑞声",
+      "score": 0.7248,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.0
+    }
+  ]
+}
