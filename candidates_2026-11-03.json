@@ -1,0 +1,282 @@
+{
+  "date": "2026-11-03",
+  "rule_version": 50,
+  "news_coverage": 52,
+  "candidates": [
+    {
+      "rank": 1,
+      "code": "001219",
+      "name": "青岛食品",
+      "score": 1.0977,
+      "news": 0.833,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 2,
+      "code": "000678",
+      "name": "襄阳轴承",
+      "score": 1.0679,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 3,
+      "code": "600715",
+      "name": "文投控股",
+      "score": 1.0385,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 4,
+      "code": "301052",
+      "name": "果麦文化",
+      "score": 1.0242,
+      "news": 0.833,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 5,
+      "code": "002708",
+      "name": "光洋股份",
+      "score": 1.0011,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 6,
+      "code": "002242",
+      "name": "九阳股份",
+      "score": 0.9898,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 7,
+      "code": "301218",
+      "name": "华是科技",
+      "score": 0.981,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 8,
+      "code": "002172",
+      "name": "澳洋健康",
+      "score": 0.9528,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 9,
+      "code": "600506",
+      "name": "统一股份",
+      "score": 0.9314,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 10,
+      "code": "000417",
+      "name": "合百集团",
+      "score": 0.9172,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 11,
+      "code": "603955",
+      "name": "大千生态",
+      "score": 0.9147,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 12,
+      "code": "301101",
+      "name": "明月镜片",
+      "score": 0.9033,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 13,
+      "code": "600189",
+      "name": "泉阳泉",
+      "score": 0.8895,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 14,
+      "code": "300413",
+      "name": "芒果超媒",
+      "score": 0.8808,
+      "news": 0.833,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 15,
+      "code": "603198",
+      "name": "迎驾贡酒",
+      "score": 0.8773,
+      "news": 0.667,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 16,
+      "code": "601595",
+      "name": "上海电影",
+      "score": 0.8761,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 17,
+      "code": "301413",
+      "name": "安培龙",
+      "score": 0.8729,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 18,
+      "code": "603713",
+      "name": "密尔克卫",
+      "score": 0.8688,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 19,
+      "code": "600576",
+      "name": "祥源文旅",
+      "score": 0.8667,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 20,
+      "code": "300006",
+      "name": "莱美药业",
+      "score": 0.8569,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 21,
+      "code": "300461",
+      "name": "田中精机",
+      "score": 0.8416,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 22,
+      "code": "001400",
+      "name": "江顺科技",
+      "score": 0.8368,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 23,
+      "code": "605488",
+      "name": "福莱新材",
+      "score": 0.8329,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 24,
+      "code": "688686",
+      "name": "奥普特",
+      "score": 0.8206,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 25,
+      "code": "300556",
+      "name": "丝路视觉",
+      "score": 0.8139,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    }
+  ]
+}
