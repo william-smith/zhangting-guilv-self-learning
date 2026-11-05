@@ -1,0 +1,282 @@
+{
+  "date": "2026-11-05",
+  "rule_version": 52,
+  "news_coverage": 39,
+  "candidates": [
+    {
+      "rank": 1,
+      "code": "603955",
+      "name": "大千生态",
+      "score": 1.0661,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 2,
+      "code": "605287",
+      "name": "德才股份",
+      "score": 1.0656,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 3,
+      "code": "300949",
+      "name": "奥雅股份",
+      "score": 1.006,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 4,
+      "code": "688004",
+      "name": "博汇科技",
+      "score": 0.9989,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 5,
+      "code": "002652",
+      "name": "扬子新材",
+      "score": 0.997,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 6,
+      "code": "002275",
+      "name": "桂林三金",
+      "score": 0.9957,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 7,
+      "code": "688686",
+      "name": "奥普特",
+      "score": 0.9869,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 8,
+      "code": "301218",
+      "name": "华是科技",
+      "score": 0.9716,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 9,
+      "code": "300413",
+      "name": "芒果超媒",
+      "score": 0.9687,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 10,
+      "code": "300426",
+      "name": "华智数媒",
+      "score": 0.9593,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 11,
+      "code": "300315",
+      "name": "掌趣科技",
+      "score": 0.9549,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 12,
+      "code": "000678",
+      "name": "襄阳轴承",
+      "score": 0.9406,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 13,
+      "code": "603381",
+      "name": "永臻股份",
+      "score": 0.9267,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 14,
+      "code": "300788",
+      "name": "中信出版",
+      "score": 0.9185,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 15,
+      "code": "001219",
+      "name": "青岛食品",
+      "score": 0.9152,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 16,
+      "code": "300115",
+      "name": "长盈精密",
+      "score": 0.9059,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 17,
+      "code": "002992",
+      "name": "宝明科技",
+      "score": 0.9032,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 18,
+      "code": "300953",
+      "name": "震裕科技",
+      "score": 0.9008,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 19,
+      "code": "001400",
+      "name": "江顺科技",
+      "score": 0.9003,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 20,
+      "code": "301052",
+      "name": "果麦文化",
+      "score": 0.8994,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 21,
+      "code": "301502",
+      "name": "华阳智能",
+      "score": 0.8966,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 22,
+      "code": "301413",
+      "name": "安培龙",
+      "score": 0.869,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 23,
+      "code": "688018",
+      "name": "乐鑫科技",
+      "score": 0.866,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 24,
+      "code": "002708",
+      "name": "光洋股份",
+      "score": 0.8572,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 25,
+      "code": "002945",
+      "name": "华林证券",
+      "score": 0.8447,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    }
+  ]
+}
