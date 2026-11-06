@@ -1,11 +1,19 @@
 {
-  "date": "2026-11-05",
-  "total": 138,
-  "emotion_M": 1.1,
+  "date": "2026-11-06",
+  "total": 44,
+  "emotion_M": 1.0,
   "boards": {},
   "topics": {},
   "stocks": {
-    "600206": {
+    "600156": {
+      "industry": "",
+      "concepts": []
+    },
+    "600207": {
+      "industry": "",
+      "concepts": []
+    },
+    "600229": {
       "industry": "",
       "concepts": []
     },
@@ -13,27 +21,19 @@
       "industry": "",
       "concepts": []
     },
+    "600278": {
+      "industry": "",
+      "concepts": []
+    },
     "600289": {
       "industry": "",
       "concepts": []
     },
-    "600396": {
+    "600327": {
       "industry": "",
       "concepts": []
     },
-    "600476": {
-      "industry": "",
-      "concepts": []
-    },
-    "600481": {
-      "industry": "",
-      "concepts": []
-    },
-    "600491": {
-      "industry": "",
-      "concepts": []
-    },
-    "600530": {
+    "600371": {
       "industry": "",
       "concepts": []
     },
@@ -41,27 +41,15 @@
       "industry": "",
       "concepts": []
     },
-    "600539": {
+    "600540": {
       "industry": "",
       "concepts": []
     },
-    "600569": {
+    "601188": {
       "industry": "",
       "concepts": []
     },
-    "600641": {
-      "industry": "",
-      "concepts": []
-    },
-    "600683": {
-      "industry": "",
-      "concepts": []
-    },
-    "600865": {
-      "industry": "",
-      "concepts": []
-    },
-    "600986": {
+    "601595": {
       "industry": "",
       "concepts": []
     },
@@ -69,39 +57,7 @@
       "industry": "",
       "concepts": []
     },
-    "601929": {
-      "industry": "",
-      "concepts": []
-    },
-    "603068": {
-      "industry": "",
-      "concepts": []
-    },
-    "603098": {
-      "industry": "",
-      "concepts": []
-    },
-    "603151": {
-      "industry": "",
-      "concepts": []
-    },
-    "603185": {
-      "industry": "",
-      "concepts": []
-    },
-    "603212": {
-      "industry": "",
-      "concepts": []
-    },
-    "603297": {
-      "industry": "",
-      "concepts": []
-    },
-    "603313": {
-      "industry": "",
-      "concepts": []
-    },
-    "603378": {
+    "603366": {
       "industry": "",
       "concepts": []
     },
@@ -109,39 +65,7 @@
       "industry": "",
       "concepts": []
     },
-    "603500": {
-      "industry": "",
-      "concepts": []
-    },
-    "603598": {
-      "industry": "",
-      "concepts": []
-    },
     "603657": {
-      "industry": "",
-      "concepts": []
-    },
-    "603682": {
-      "industry": "",
-      "concepts": []
-    },
-    "603699": {
-      "industry": "",
-      "concepts": []
-    },
-    "603737": {
-      "industry": "",
-      "concepts": []
-    },
-    "603876": {
-      "industry": "",
-      "concepts": []
-    },
-    "603893": {
-      "industry": "",
-      "concepts": []
-    },
-    "603956": {
       "industry": "",
       "concepts": []
     },
@@ -149,83 +73,15 @@
       "industry": "",
       "concepts": []
     },
-    "603990": {
-      "industry": "",
-      "concepts": []
-    },
-    "605069": {
-      "industry": "",
-      "concepts": []
-    },
-    "605188": {
-      "industry": "",
-      "concepts": []
-    },
-    "605287": {
-      "industry": "",
-      "concepts": []
-    },
     "605339": {
       "industry": "",
       "concepts": []
     },
-    "605488": {
+    "688053": {
       "industry": "",
       "concepts": []
     },
-    "688087": {
-      "industry": "",
-      "concepts": []
-    },
-    "688109": {
-      "industry": "",
-      "concepts": []
-    },
-    "688158": {
-      "industry": "",
-      "concepts": []
-    },
-    "688185": {
-      "industry": "",
-      "concepts": []
-    },
-    "688199": {
-      "industry": "",
-      "concepts": []
-    },
-    "688209": {
-      "industry": "",
-      "concepts": []
-    },
-    "688225": {
-      "industry": "",
-      "concepts": []
-    },
-    "688227": {
-      "industry": "",
-      "concepts": []
-    },
-    "688290": {
-      "industry": "",
-      "concepts": []
-    },
-    "688315": {
-      "industry": "",
-      "concepts": []
-    },
-    "688316": {
-      "industry": "",
-      "concepts": []
-    },
-    "688353": {
-      "industry": "",
-      "concepts": []
-    },
-    "688371": {
-      "industry": "",
-      "concepts": []
-    },
-    "688411": {
+    "688203": {
       "industry": "",
       "concepts": []
     },
@@ -233,111 +89,23 @@
       "industry": "",
       "concepts": []
     },
-    "688499": {
+    "000525": {
       "industry": "",
       "concepts": []
     },
-    "688503": {
+    "000595": {
       "industry": "",
       "concepts": []
     },
-    "688507": {
+    "001258": {
       "industry": "",
       "concepts": []
     },
-    "688516": {
+    "001308": {
       "industry": "",
       "concepts": []
     },
-    "688521": {
-      "industry": "",
-      "concepts": []
-    },
-    "688622": {
-      "industry": "",
-      "concepts": []
-    },
-    "688648": {
-      "industry": "",
-      "concepts": []
-    },
-    "688669": {
-      "industry": "",
-      "concepts": []
-    },
-    "688680": {
-      "industry": "",
-      "concepts": []
-    },
-    "688726": {
-      "industry": "",
-      "concepts": []
-    },
-    "688768": {
-      "industry": "",
-      "concepts": []
-    },
-    "000017": {
-      "industry": "",
-      "concepts": []
-    },
-    "000029": {
-      "industry": "",
-      "concepts": []
-    },
-    "000428": {
-      "industry": "",
-      "concepts": []
-    },
-    "000533": {
-      "industry": "",
-      "concepts": []
-    },
-    "000603": {
-      "industry": "",
-      "concepts": []
-    },
-    "000635": {
-      "industry": "",
-      "concepts": []
-    },
-    "000700": {
-      "industry": "",
-      "concepts": []
-    },
-    "000710": {
-      "industry": "",
-      "concepts": []
-    },
-    "000889": {
-      "industry": "",
-      "concepts": []
-    },
-    "000995": {
-      "industry": "",
-      "concepts": []
-    },
-    "001269": {
-      "industry": "",
-      "concepts": []
-    },
-    "001330": {
-      "industry": "",
-      "concepts": []
-    },
-    "001360": {
-      "industry": "",
-      "concepts": []
-    },
-    "001393": {
-      "industry": "",
-      "concepts": []
-    },
-    "002045": {
-      "industry": "",
-      "concepts": []
-    },
-    "002081": {
+    "001316": {
       "industry": "",
       "concepts": []
     },
@@ -349,31 +117,7 @@
       "industry": "",
       "concepts": []
     },
-    "002131": {
-      "industry": "",
-      "concepts": []
-    },
-    "002135": {
-      "industry": "",
-      "concepts": []
-    },
-    "002307": {
-      "industry": "",
-      "concepts": []
-    },
-    "002309": {
-      "industry": "",
-      "concepts": []
-    },
-    "002313": {
-      "industry": "",
-      "concepts": []
-    },
-    "002318": {
-      "industry": "",
-      "concepts": []
-    },
-    "002343": {
+    "002310": {
       "industry": "",
       "concepts": []
     },
@@ -381,43 +125,15 @@
       "industry": "",
       "concepts": []
     },
-    "002421": {
-      "industry": "",
-      "concepts": []
-    },
-    "002506": {
-      "industry": "",
-      "concepts": []
-    },
-    "002529": {
-      "industry": "",
-      "concepts": []
-    },
-    "002565": {
-      "industry": "",
-      "concepts": []
-    },
     "002578": {
       "industry": "",
       "concepts": []
     },
-    "002596": {
+    "002712": {
       "industry": "",
       "concepts": []
     },
-    "002620": {
-      "industry": "",
-      "concepts": []
-    },
-    "002759": {
-      "industry": "",
-      "concepts": []
-    },
-    "002773": {
-      "industry": "",
-      "concepts": []
-    },
-    "002865": {
+    "002889": {
       "industry": "",
       "concepts": []
     },
@@ -425,27 +141,15 @@
       "industry": "",
       "concepts": []
     },
-    "003033": {
+    "002973": {
       "industry": "",
       "concepts": []
     },
-    "300010": {
+    "300118": {
       "industry": "",
       "concepts": []
     },
-    "300049": {
-      "industry": "",
-      "concepts": []
-    },
-    "300071": {
-      "industry": "",
-      "concepts": []
-    },
-    "300093": {
-      "industry": "",
-      "concepts": []
-    },
-    "300120": {
+    "300123": {
       "industry": "",
       "concepts": []
     },
@@ -453,103 +157,23 @@
       "industry": "",
       "concepts": []
     },
-    "300201": {
+    "300212": {
       "industry": "",
       "concepts": []
     },
-    "300316": {
+    "300237": {
       "industry": "",
       "concepts": []
     },
-    "300438": {
+    "300313": {
       "industry": "",
       "concepts": []
     },
-    "300442": {
-      "industry": "",
-      "concepts": []
-    },
-    "300477": {
-      "industry": "",
-      "concepts": []
-    },
-    "300493": {
-      "industry": "",
-      "concepts": []
-    },
-    "300550": {
-      "industry": "",
-      "concepts": []
-    },
-    "300647": {
-      "industry": "",
-      "concepts": []
-    },
-    "300688": {
-      "industry": "",
-      "concepts": []
-    },
-    "300695": {
-      "industry": "",
-      "concepts": []
-    },
-    "300709": {
-      "industry": "",
-      "concepts": []
-    },
-    "300716": {
-      "industry": "",
-      "concepts": []
-    },
-    "300751": {
-      "industry": "",
-      "concepts": []
-    },
-    "300842": {
+    "300686": {
       "industry": "",
       "concepts": []
     },
     "300949": {
-      "industry": "",
-      "concepts": []
-    },
-    "301000": {
-      "industry": "",
-      "concepts": []
-    },
-    "301030": {
-      "industry": "",
-      "concepts": []
-    },
-    "301061": {
-      "industry": "",
-      "concepts": []
-    },
-    "301171": {
-      "industry": "",
-      "concepts": []
-    },
-    "301178": {
-      "industry": "",
-      "concepts": []
-    },
-    "301182": {
-      "industry": "",
-      "concepts": []
-    },
-    "301209": {
-      "industry": "",
-      "concepts": []
-    },
-    "301323": {
-      "industry": "",
-      "concepts": []
-    },
-    "301396": {
-      "industry": "",
-      "concepts": []
-    },
-    "301583": {
       "industry": "",
       "concepts": []
     },
