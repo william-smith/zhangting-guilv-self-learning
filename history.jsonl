@@ -48,3 +48,4 @@
 {"date": "2026-11-04", "rule_version": 51, "cand_count": 25, "zt_count": 382, "hits": 1, "precision": 0.04, "recall": 0.0026, "hit_codes": ["002275"], "leak_count": 381, "news_count": 57, "news_hits": 0}
 {"date": "2026-11-05", "rule_version": 52, "cand_count": 25, "zt_count": 138, "hits": 3, "precision": 0.12, "recall": 0.0217, "hit_codes": ["605287", "300949", "603381"], "leak_count": 135, "news_count": 37, "news_hits": 0}
 {"date": "2026-11-06", "rule_version": 53, "cand_count": 25, "zt_count": 44, "hits": 5, "precision": 0.2, "recall": 0.1136, "hit_codes": ["600261", "300949", "002086", "002088", "601595"], "leak_count": 39, "news_count": 61, "news_hits": 0}
+{"date": "2026-11-09", "rule_version": 54, "cand_count": 25, "zt_count": 84, "hits": 6, "precision": 0.24, "recall": 0.0714, "hit_codes": ["002086", "603366", "601188", "300237", "600327", "002708"], "leak_count": 78, "news_count": 45, "news_hits": 0}
