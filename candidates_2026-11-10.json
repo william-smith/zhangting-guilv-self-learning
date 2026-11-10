@@ -1,0 +1,282 @@
+{
+  "date": "2026-11-10",
+  "rule_version": 55,
+  "news_coverage": 37,
+  "candidates": [
+    {
+      "rank": 1,
+      "code": "601599",
+      "name": "浙文影业",
+      "score": 1.0978,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 2,
+      "code": "600327",
+      "name": "大东方",
+      "score": 1.0811,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 3,
+      "code": "002086",
+      "name": "东方海洋",
+      "score": 1.0724,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 4,
+      "code": "601188",
+      "name": "龙江交通",
+      "score": 1.0693,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 5,
+      "code": "002708",
+      "name": "光洋股份",
+      "score": 1.0668,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 6,
+      "code": "603955",
+      "name": "大千生态",
+      "score": 1.0394,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 7,
+      "code": "000530",
+      "name": "冰山冷热",
+      "score": 1.0387,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 8,
+      "code": "000525",
+      "name": "红太阳",
+      "score": 1.0007,
+      "news": 0.5,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 9,
+      "code": "002578",
+      "name": "闽发铝业",
+      "score": 0.996,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 10,
+      "code": "001219",
+      "name": "青岛食品",
+      "score": 0.995,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 11,
+      "code": "002242",
+      "name": "九阳股份",
+      "score": 0.9792,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 12,
+      "code": "300006",
+      "name": "莱美药业",
+      "score": 0.9686,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 13,
+      "code": "605488",
+      "name": "福莱新材",
+      "score": 0.9603,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 14,
+      "code": "603626",
+      "name": "科森科技",
+      "score": 0.9595,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 15,
+      "code": "300949",
+      "name": "奥雅股份",
+      "score": 0.9567,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 16,
+      "code": "002164",
+      "name": "宁波东力",
+      "score": 0.9552,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 17,
+      "code": "300473",
+      "name": "德尔股份",
+      "score": 0.9538,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 18,
+      "code": "600715",
+      "name": "文投控股",
+      "score": 0.9473,
+      "news": 1.0,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 19,
+      "code": "688585",
+      "name": "上纬新材",
+      "score": 0.9441,
+      "news": 0.5,
+      "news_heat": 0.4,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 20,
+      "code": "601595",
+      "name": "上海电影",
+      "score": 0.939,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 21,
+      "code": "301218",
+      "name": "华是科技",
+      "score": 0.9325,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 22,
+      "code": "600278",
+      "name": "东方创业",
+      "score": 0.9258,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 23,
+      "code": "001316",
+      "name": "润贝航科",
+      "score": 0.9062,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 24,
+      "code": "002181",
+      "name": "粤 传 媒",
+      "score": 0.902,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 25,
+      "code": "300969",
+      "name": "恒帅股份",
+      "score": 0.8971,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    }
+  ]
+}
