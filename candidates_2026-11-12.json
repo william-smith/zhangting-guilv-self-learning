@@ -1,0 +1,282 @@
+{
+  "date": "2026-11-12",
+  "rule_version": 57,
+  "news_coverage": 58,
+  "candidates": [
+    {
+      "rank": 1,
+      "code": "603706",
+      "name": "东方环宇",
+      "score": 1.0953,
+      "news": 0.5,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 2,
+      "code": "002425",
+      "name": "凯撒文化",
+      "score": 1.0927,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 3,
+      "code": "300473",
+      "name": "德尔股份",
+      "score": 1.0788,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 4,
+      "code": "603466",
+      "name": "风语筑",
+      "score": 1.0771,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 5,
+      "code": "301052",
+      "name": "果麦文化",
+      "score": 1.0749,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 6,
+      "code": "600261",
+      "name": "阳光照明",
+      "score": 1.0744,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 7,
+      "code": "000635",
+      "name": "英 力 特",
+      "score": 1.0729,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 8,
+      "code": "600715",
+      "name": "文投控股",
+      "score": 1.071,
+      "news": 0.833,
+      "news_heat": 0.4,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 9,
+      "code": "603258",
+      "name": "电魂网络",
+      "score": 1.0697,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 10,
+      "code": "002086",
+      "name": "东方海洋",
+      "score": 1.068,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 11,
+      "code": "002164",
+      "name": "宁波东力",
+      "score": 1.0671,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 12,
+      "code": "002708",
+      "name": "光洋股份",
+      "score": 1.0659,
+      "news": 0.667,
+      "news_heat": 0.2,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 13,
+      "code": "605488",
+      "name": "福莱新材",
+      "score": 1.0645,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 14,
+      "code": "601595",
+      "name": "上海电影",
+      "score": 1.064,
+      "news": 0.75,
+      "news_heat": 0.4,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 15,
+      "code": "300695",
+      "name": "兆丰股份",
+      "score": 1.0408,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 16,
+      "code": "301313",
+      "name": "凡拓数创",
+      "score": 1.0187,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 17,
+      "code": "000530",
+      "name": "冰山冷热",
+      "score": 1.0039,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 18,
+      "code": "300291",
+      "name": "百纳千成",
+      "score": 0.9981,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 19,
+      "code": "003032",
+      "name": "传智教育",
+      "score": 0.9946,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 20,
+      "code": "300426",
+      "name": "华智数媒",
+      "score": 0.9902,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 21,
+      "code": "605255",
+      "name": "天普股份",
+      "score": 0.9876,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 22,
+      "code": "300613",
+      "name": "富瀚微",
+      "score": 0.9855,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 23,
+      "code": "688585",
+      "name": "上纬新材",
+      "score": 0.9825,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 24,
+      "code": "000700",
+      "name": "模塑科技",
+      "score": 0.9748,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    },
+    {
+      "rank": 25,
+      "code": "002578",
+      "name": "闽发铝业",
+      "score": 0.971,
+      "news": 0,
+      "news_heat": 0,
+      "topic": 0,
+      "block": 0,
+      "emotion_M": 1.1
+    }
+  ]
+}
