@@ -2,52 +2,184 @@
   "date": "2026-11-11",
   "total": 123,
   "emotion_M": 1.1,
-  "boards": {},
-  "topics": {},
+  "boards": {
+    "电子信息": 9,
+    "造纸行业": 1,
+    "房地产": 2,
+    "化工行业": 3,
+    "玻璃行业": 4,
+    "商业百货": 2,
+    "生物制药": 2,
+    "汽车制造": 4,
+    "次新股": 5,
+    "家电行业": 2,
+    "塑料制品": 2,
+    "机械行业": 7,
+    "钢铁行业": 1,
+    "服装鞋类": 2,
+    "有色金属": 1,
+    "电器行业": 1,
+    "电子器件": 1,
+    "建筑建材": 1
+  },
+  "topics": {
+    "碳中和": 1,
+    "黄河三角": 2,
+    "锂电池": 1,
+    "重组概念": 2,
+    "新能源": 2,
+    "海峡西岸": 4,
+    "金融参股": 4,
+    "参股金融": 3,
+    "涉矿概念": 1,
+    "民营银行": 2,
+    "融资融券": 1,
+    "金融改革": 1,
+    "生物疫苗": 1,
+    "高校背景": 1,
+    "上海本地": 1,
+    "振兴沈阳": 1,
+    "含B股": 2,
+    "国企改革": 1,
+    "股权激励": 1,
+    "含H股": 2,
+    "专精特新": 6,
+    "光伏概念": 3,
+    "券商重仓": 1,
+    "TOPCon": 2,
+    "HIT电池": 2,
+    "无线耳机": 2,
+    "钙钛矿": 1,
+    "风电": 2,
+    "国防军工": 1,
+    "军工航天": 1,
+    "奢侈品": 1,
+    "深圳本地": 1,
+    "草甘膦": 1,
+    "固废处理": 1,
+    "油气改革": 1,
+    "循环经济": 1,
+    "朝鲜改革": 2,
+    "图们江": 2,
+    "业绩预降": 1,
+    "陕甘宁": 1,
+    "空气治理": 1,
+    "充电桩": 1,
+    "绿色照明": 2,
+    "节能环保": 2,
+    "小米概念": 4,
+    "5G概念": 4,
+    "网络游戏": 1,
+    "风能": 1,
+    "智能机器": 2,
+    "可燃冰": 1,
+    "海工装备": 1,
+    "页岩气": 1,
+    "华为概念": 3,
+    "武汉规划": 1,
+    "宽带提速": 2,
+    "触摸屏": 1,
+    "智能穿戴": 1,
+    "准ST股": 1,
+    "特斯拉": 1,
+    "汽车电子": 1,
+    "赛马概念": 1,
+    "机器人概念": 1,
+    "3D打印": 1,
+    "摘帽概念": 1,
+    "华为汽车": 3,
+    "乡村振兴": 1,
+    "华为鸿蒙": 1,
+    "鸿蒙概念": 1,
+    "免疫治疗": 1,
+    "抗癌": 1,
+    "安防服务": 1,
+    "智能家居": 1,
+    "固态电池": 1,
+    "核电核能": 1,
+    "恒大概念": 1
+  },
   "stocks": {
     "600076": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子信息",
+      "concepts": [
+        "碳中和",
+        "黄河三角",
+        "锂电池",
+        "重组概念",
+        "新能源"
+      ]
     },
     "600103": {
-      "industry": "",
-      "concepts": []
+      "industry": "造纸行业",
+      "concepts": [
+        "海峡西岸",
+        "金融参股",
+        "参股金融"
+      ]
     },
     "600162": {
-      "industry": "",
-      "concepts": []
+      "industry": "房地产",
+      "concepts": [
+        "涉矿概念",
+        "重组概念",
+        "民营银行"
+      ]
     },
     "600228": {
-      "industry": "",
-      "concepts": []
+      "industry": "化工行业",
+      "concepts": [
+        "金融参股"
+      ]
     },
     "600293": {
-      "industry": "",
-      "concepts": []
+      "industry": "玻璃行业",
+      "concepts": [
+        "融资融券",
+        "参股金融"
+      ]
     },
     "600327": {
-      "industry": "",
-      "concepts": []
+      "industry": "商业百货",
+      "concepts": [
+        "金融改革",
+        "民营银行",
+        "金融参股",
+        "参股金融"
+      ]
     },
     "600530": {
-      "industry": "",
-      "concepts": []
+      "industry": "生物制药",
+      "concepts": [
+        "生物疫苗",
+        "高校背景",
+        "金融参股",
+        "上海本地"
+      ]
     },
     "600629": {
-      "industry": "",
+      "industry": "玻璃行业",
       "concepts": []
     },
     "600715": {
-      "industry": "",
-      "concepts": []
+      "industry": "汽车制造",
+      "concepts": [
+        "振兴沈阳"
+      ]
     },
     "600776": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子信息",
+      "concepts": [
+        "含B股",
+        "国企改革",
+        "股权激励"
+      ]
     },
     "600876": {
-      "industry": "",
-      "concepts": []
+      "industry": "玻璃行业",
+      "concepts": [
+        "含H股"
+      ]
     },
     "601595": {
       "industry": "",
@@ -59,11 +191,15 @@
     },
     "603028": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "专精特新"
+      ]
     },
     "603040": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "专精特新"
+      ]
     },
     "603042": {
       "industry": "",
@@ -74,7 +210,7 @@
       "concepts": []
     },
     "603135": {
-      "industry": "",
+      "industry": "次新股",
       "concepts": []
     },
     "603228": {
@@ -91,15 +227,26 @@
     },
     "603330": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "专精特新",
+        "光伏概念"
+      ]
     },
     "603366": {
-      "industry": "",
-      "concepts": []
+      "industry": "家电行业",
+      "concepts": [
+        "光伏概念",
+        "券商重仓"
+      ]
     },
     "603396": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "TOPCon",
+        "专精特新",
+        "HIT电池",
+        "光伏概念"
+      ]
     },
     "603429": {
       "industry": "",
@@ -119,7 +266,9 @@
     },
     "603595": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "无线耳机"
+      ]
     },
     "603706": {
       "industry": "",
@@ -127,7 +276,9 @@
     },
     "603725": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "专精特新"
+      ]
     },
     "603730": {
       "industry": "",
@@ -143,7 +294,10 @@
     },
     "688025": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "钙钛矿",
+        "专精特新"
+      ]
     },
     "688048": {
       "industry": "",
@@ -183,7 +337,9 @@
     },
     "688585": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "风电"
+      ]
     },
     "688766": {
       "industry": "",
@@ -198,31 +354,52 @@
       "concepts": []
     },
     "000026": {
-      "industry": "",
-      "concepts": []
+      "industry": "商业百货",
+      "concepts": [
+        "国防军工",
+        "军工航天",
+        "含B股",
+        "奢侈品",
+        "深圳本地"
+      ]
     },
     "000407": {
-      "industry": "",
-      "concepts": []
+      "industry": "塑料制品",
+      "concepts": [
+        "草甘膦",
+        "固废处理",
+        "油气改革",
+        "循环经济"
+      ]
     },
     "000545": {
-      "industry": "",
-      "concepts": []
+      "industry": "化工行业",
+      "concepts": [
+        "朝鲜改革",
+        "图们江"
+      ]
     },
     "000631": {
-      "industry": "",
-      "concepts": []
+      "industry": "房地产",
+      "concepts": [
+        "风电",
+        "朝鲜改革",
+        "图们江",
+        "业绩预降"
+      ]
     },
     "000635": {
-      "industry": "",
-      "concepts": []
+      "industry": "化工行业",
+      "concepts": [
+        "陕甘宁"
+      ]
     },
     "000678": {
-      "industry": "",
+      "industry": "机械行业",
       "concepts": []
     },
     "001282": {
-      "industry": "",
+      "industry": "次新股",
       "concepts": []
     },
     "001331": {
@@ -234,104 +411,161 @@
       "concepts": []
     },
     "002076": {
-      "industry": "",
-      "concepts": []
+      "industry": "家电行业",
+      "concepts": [
+        "空气治理",
+        "充电桩",
+        "绿色照明",
+        "节能环保"
+      ]
     },
     "002110": {
-      "industry": "",
-      "concepts": []
+      "industry": "钢铁行业",
+      "concepts": [
+        "海峡西岸"
+      ]
     },
     "002148": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子信息",
+      "concepts": [
+        "小米概念",
+        "5G概念",
+        "网络游戏"
+      ]
     },
     "002154": {
-      "industry": "",
+      "industry": "服装鞋类",
       "concepts": []
     },
     "002160": {
-      "industry": "",
+      "industry": "有色金属",
       "concepts": []
     },
     "002164": {
-      "industry": "",
-      "concepts": []
+      "industry": "电器行业",
+      "concepts": [
+        "风能",
+        "新能源"
+      ]
     },
     "002209": {
-      "industry": "",
-      "concepts": []
+      "industry": "机械行业",
+      "concepts": [
+        "智能机器"
+      ]
     },
     "002278": {
-      "industry": "",
-      "concepts": []
+      "industry": "机械行业",
+      "concepts": [
+        "可燃冰",
+        "海工装备",
+        "页岩气"
+      ]
     },
     "002281": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子信息",
+      "concepts": [
+        "华为概念",
+        "5G概念",
+        "武汉规划",
+        "宽带提速"
+      ]
     },
     "002313": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子信息",
+      "concepts": [
+        "5G概念",
+        "宽带提速"
+      ]
     },
     "002362": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子信息",
+      "concepts": [
+        "触摸屏",
+        "智能穿戴",
+        "准ST股"
+      ]
     },
     "002384": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子信息",
+      "concepts": [
+        "华为概念",
+        "小米概念",
+        "特斯拉",
+        "绿色照明"
+      ]
     },
     "002425": {
-      "industry": "",
+      "industry": "服装鞋类",
       "concepts": []
     },
     "002463": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子器件",
+      "concepts": [
+        "汽车电子"
+      ]
     },
     "002520": {
-      "industry": "",
-      "concepts": []
+      "industry": "机械行业",
+      "concepts": [
+        "赛马概念",
+        "智能机器",
+        "机器人概念"
+      ]
     },
     "002529": {
-      "industry": "",
-      "concepts": []
+      "industry": "机械行业",
+      "concepts": [
+        "海峡西岸",
+        "3D打印",
+        "节能环保"
+      ]
     },
     "002593": {
-      "industry": "",
-      "concepts": []
+      "industry": "汽车制造",
+      "concepts": [
+        "海峡西岸"
+      ]
     },
     "002623": {
-      "industry": "",
+      "industry": "玻璃行业",
       "concepts": []
     },
     "002633": {
-      "industry": "",
-      "concepts": []
+      "industry": "机械行业",
+      "concepts": [
+        "摘帽概念"
+      ]
     },
     "002694": {
-      "industry": "",
+      "industry": "塑料制品",
       "concepts": []
     },
     "002703": {
-      "industry": "",
-      "concepts": []
+      "industry": "汽车制造",
+      "concepts": [
+        "含H股"
+      ]
     },
     "002708": {
-      "industry": "",
+      "industry": "汽车制造",
       "concepts": []
     },
     "002713": {
-      "industry": "",
+      "industry": "建筑建材",
       "concepts": []
     },
     "002765": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "华为汽车"
+      ]
     },
     "002779": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "乡村振兴"
+      ]
     },
     "002795": {
       "industry": "",
@@ -343,19 +577,28 @@
     },
     "002861": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "无线耳机",
+        "小米概念"
+      ]
     },
     "002886": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "华为汽车"
+      ]
     },
     "002913": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "小米概念"
+      ]
     },
     "002916": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "华为概念"
+      ]
     },
     "002919": {
       "industry": "",
@@ -379,27 +622,42 @@
     },
     "003032": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "华为鸿蒙",
+        "鸿蒙概念"
+      ]
     },
     "300147": {
-      "industry": "",
-      "concepts": []
+      "industry": "生物制药",
+      "concepts": [
+        "免疫治疗",
+        "抗癌"
+      ]
     },
     "300308": {
-      "industry": "",
-      "concepts": []
+      "industry": "机械行业",
+      "concepts": [
+        "黄河三角"
+      ]
     },
     "300310": {
-      "industry": "",
-      "concepts": []
+      "industry": "电子信息",
+      "concepts": [
+        "5G概念",
+        "安防服务",
+        "智能家居"
+      ]
     },
     "300394": {
-      "industry": "",
+      "industry": "电子信息",
       "concepts": []
     },
     "300473": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "华为汽车",
+        "固态电池"
+      ]
     },
     "300476": {
       "industry": "",
@@ -407,7 +665,9 @@
     },
     "300489": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "核电核能"
+      ]
     },
     "300501": {
       "industry": "",
@@ -443,7 +703,10 @@
     },
     "300842": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "TOPCon",
+        "HIT电池"
+      ]
     },
     "300939": {
       "industry": "",
@@ -455,7 +718,9 @@
     },
     "300990": {
       "industry": "",
-      "concepts": []
+      "concepts": [
+        "恒大概念"
+      ]
     },
     "301049": {
       "industry": "",
@@ -478,15 +743,15 @@
       "concepts": []
     },
     "301314": {
-      "industry": "",
+      "industry": "次新股",
       "concepts": []
     },
     "301486": {
-      "industry": "",
+      "industry": "次新股",
       "concepts": []
     },
     "301578": {
-      "industry": "",
+      "industry": "次新股",
       "concepts": []
     },
     "301596": {
@@ -498,6 +763,20 @@
       "concepts": []
     }
   },
-  "hot_boards": [],
-  "hot_topics": []
+  "hot_boards": [
+    "电子信息",
+    "机械行业",
+    "次新股",
+    "玻璃行业",
+    "汽车制造",
+    "化工行业"
+  ],
+  "hot_topics": [
+    "专精特新",
+    "海峡西岸",
+    "金融参股",
+    "小米概念",
+    "5G概念",
+    "参股金融"
+  ]
 }

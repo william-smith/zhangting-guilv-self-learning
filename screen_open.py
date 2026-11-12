@@ -163,11 +163,17 @@ def main():
     if neg_filtered:
         lines.append("> 信息面风控：已剔除 **%d** 只强负面新闻股（退市/立案/处罚等）。" % neg_filtered)
     if mkt_idx:
-        lines.append("> 🧭 市场维度(T-1)：涨停 **%d** 只，情绪乘子 **M=%.2f**；热点板块 %s"
+        # 注意: last_board.json 的键是 boards/topics, 不是 blocks (旧版取错键导致恒显示 "—")
+        hb = "、".join("%s(%d)" % (b, c) for b, c in
+                      sorted((mkt_idx.get("boards") or {}).items(),
+                             key=lambda kv: -kv[1])[:5]) or "—"
+        ht = "、".join((mkt_idx.get("hot_topics") or [])[:5]) or "—"
+        lines.append("> 🧭 市场维度(T-1)：涨停 **%d** 只，情绪乘子 **M=%.2f**；热点板块 %s；热点题材 %s"
                      % (mkt_idx.get("total", 0), M.emotion_multiplier(mkt_idx, rules),
-                        "、".join("%s(%d)" % (b, c) for b, c in
-                                  sorted(mkt_idx.get("blocks", {}).items(),
-                                         key=lambda kv: -kv[1])[:5]) or "—"))
+                        hb, ht))
+        if (rules.get("market") or {}).get("shadow_mode", True):
+            lines.append("> 🔍 **观察模式**：题材/板块列为真实计算值，暂不计入评分（排序不受影响），"
+                         "观察数日确认分布合理后再正式启用。")
     else:
         lines.append("> 🧭 市场维度：无 T-1 上下文，题材/板块/情绪因子本轮未生效。")
     lines.append("> ⚠️ 量化辅助筛选，非投资建议，涨停不保证。\n")

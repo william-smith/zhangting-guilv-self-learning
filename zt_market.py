@@ -31,6 +31,66 @@ except Exception:
 
 WORKDIR = os.path.dirname(os.path.abspath(__file__))
 LAST_BOARD = os.path.join(WORKDIR, "last_board.json")
+# 全市场行业/概念映射(由 build_sector_cache.py 生成, 供板块/题材因子使用)。
+# 说明: build_sector_cache.py 会 `from zt_market import SECTOR_CACHE, CONCEPT_CACHE`，
+#       这两个常量必须留在本模块，否则构建脚本只能退回自己的路径兜底。
+SECTOR_CACHE = os.path.join(WORKDIR, "sector_cache.json")
+CONCEPT_CACHE = os.path.join(WORKDIR, "concept_cache.json")
+
+# 名称关键词兜底(零网络): 仅当个股不在任何缓存中时使用, 覆盖率低但永远可用。
+SECTOR_KEYWORDS = (
+    ("银行", "银行"), ("证券", "券商"), ("保险", "保险"), ("医药", "医药"),
+    ("生物", "生物医药"), ("地产", "房地产"), ("置业", "房地产"),
+    ("电力", "电力"), ("能源", "能源"), ("煤炭", "煤炭"), ("有色", "有色金属"),
+    ("黄金", "黄金"), ("钢铁", "钢铁"), ("化工", "化工"), ("汽车", "汽车"),
+    ("电子", "电子"), ("科技", "科技"), ("软件", "软件"), ("网络", "互联网"),
+    ("传媒", "文化传媒"), ("文化", "文化传媒"), ("电影", "影视"),
+    ("旅游", "旅游"), ("食品", "食品"), ("酒", "酿酒"), ("农业", "农业"),
+    ("环保", "环保"), ("建筑", "建筑"), ("建材", "建材"), ("机械", "机械"),
+    ("军工", "军工"), ("航空", "航空"), ("港口", "港口"), ("高速", "公路"),
+)
+
+# 惰性加载, 避免逐股打分时反复读盘
+_TAG_CACHE = {"sector": None, "concept": None}
+
+
+def _load_tag_cache(path, key):
+    if _TAG_CACHE[key] is None:
+        try:
+            _TAG_CACHE[key] = json.load(open(path, encoding="utf-8")) or {}
+        except Exception:
+            _TAG_CACHE[key] = {}
+        if not _TAG_CACHE[key]:
+            print("[warn] %s 读取为空/不存在, %s 标签映射降级为名称关键词词典。"
+                  % (os.path.basename(path), key))
+    return _TAG_CACHE[key]
+
+
+def resolve_tags(code, name="", mkt_idx=None):
+    """返回 (行业, 概念列表)。
+    优先级: 涨停池 enrichment(T-1 最准) > 全市场行业/概念缓存 > 名称关键词词典。
+    关键: 不要求 code 必须是 T-1 涨停股 —— 全市场候选都应能拿到标签。
+    """
+    s = ((mkt_idx or {}).get("stocks") or {}).get(code or "") or {}
+    ind = s.get("industry") or ""
+    cons = list(s.get("concepts") or [])
+
+    sec = _load_tag_cache(SECTOR_CACHE, "sector").get(code or "") or []
+    cpt = _load_tag_cache(CONCEPT_CACHE, "concept").get(code or "") or []
+    if not ind and sec:
+        ind = sec[0]
+    seen = set(cons)
+    for t in cpt:
+        if t not in seen:
+            cons.append(t)
+            seen.add(t)
+    if not ind and name:
+        for kw, tag in SECTOR_KEYWORDS:
+            if kw in name:
+                ind = tag
+                break
+    return (ind, cons)
+
 
 _EM_HTTP = {"User-Agent": "Mozilla/5.0", "Referer": "https://quote.eastmoney.com/"}
 
@@ -47,6 +107,10 @@ def ensure_market_rules(rules):
     m = rules.setdefault("market", {})
     for sec, dv in _DEFAULT_MARKET.items():
         m.setdefault(sec, dict(dv))
+    # 观察模式(默认开): 题材/板块分照常计算并展示, 但暂不计入总分/排序。
+    # 因这两个因子的权重是在"长期恒为 0"的状态下学出来的, 直接启用会让打分分布突变。
+    # 观察数日确认分值分布合理后, 在 rules.json 把该项改为 false 即可正式启用。
+    m.setdefault("shadow_mode", True)
     factors = rules.setdefault("factors", {})
     for k, w in (("topic_effect", 0.0516), ("block_effect", 0.0516)):
         if k not in factors:
@@ -132,25 +196,41 @@ def collect_board_context(datestr, actual_zt):
     # 尝试东方财富涨停池 enrichment（行业/题材）
     try:
         pool = _fetch_em_zt_pool(datestr) or []
-    except Exception:
+    except Exception as e:
+        print("[warn] 涨停池 enrichment 抓取异常: %s" % repr(e)[:120])
         pool = []
+    if not pool:
+        # 不再静默退化: 东财 push2ex 接口在部分环境返回 404/空数据,
+        # 此时改用本地全市场行业/概念缓存给涨停股补标签, 板块/题材因子仍可工作。
+        print("[warn] 涨停池 enrichment 不可用(接口返回空/404), "
+              "改用 sector_cache/concept_cache 为涨停股补行业与题材。")
 
     boards, topics, stocks = {}, {}, {}
-    seen = set()
     for it in pool:
-        c = it["code"]
-        seen.add(c)
-        ind = it.get("industry") or ""
-        cons = it.get("concepts") or []
-        if ind:
-            boards[ind] = boards.get(ind, 0) + 1
-        for t in cons:
-            topics[t] = topics.get(t, 0) + 1
-        stocks[c] = {"industry": ind, "concepts": cons}
-    # actual_zt 中不在池内的，仍登记 code（行业/题材未知，不计入热点）
+        stocks[it["code"]] = {"industry": it.get("industry") or "",
+                              "concepts": list(it.get("concepts") or [])}
+    # 统一以 actual_zt 为统计口径; 标签缺失的用本地缓存补齐(不再留空)。
+    tagged = 0
     for c in (actual_zt or []):
-        if c not in seen:
-            stocks.setdefault(c, {"industry": "", "concepts": []})
+        s = stocks.setdefault(c, {"industry": "", "concepts": []})
+        ind, cons = resolve_tags(c, "", None)
+        if not s["industry"] and ind:
+            s["industry"] = ind
+        seen_t = set(s["concepts"])
+        for t in cons:
+            if t not in seen_t:
+                s["concepts"].append(t)
+                seen_t.add(t)
+        if s["industry"]:
+            boards[s["industry"]] = boards.get(s["industry"], 0) + 1
+        for t in s["concepts"]:
+            topics[t] = topics.get(t, 0) + 1
+        if s["industry"] or s["concepts"]:
+            tagged += 1
+    print("[市场上下文] 涨停 %d 只, 行业/题材标签覆盖 %d 只; "
+          "行业 %d 个, 题材 %d 个" % (total, tagged, len(boards), len(topics)))
+    if not boards and not topics:
+        print("[warn] 行业/概念缓存均不可用, 题材/板块因子本轮将降级为 0。")
 
     mkt["boards"] = boards
     mkt["topics"] = topics
@@ -213,11 +293,9 @@ def stock_market_scores(code, name, mkt_idx, rules):
     mrule = (rules.get("market") or {}) if isinstance(rules, dict) else {}
     cap_block = (mrule.get("block") or {}).get("cap", 8)
     cap_topic = (mrule.get("topic") or {}).get("cap", 6)
-    s = (mkt_idx.get("stocks") or {}).get(code or "")
-    if not s:
-        return (0.0, 0.0)
-    ind = s.get("industry") or ""
-    cons = s.get("concepts") or []
+    # 不再要求 code 必须是 T-1 涨停股: 全市场候选都通过 resolve_tags 拿标签,
+    # 标签来源 = 涨停池 enrichment > 全市场行业/概念缓存 > 名称关键词词典。
+    ind, cons = resolve_tags(code, name, mkt_idx)
     hot_boards = set(mkt_idx.get("hot_boards") or [])
     hot_topics = set(mkt_idx.get("hot_topics") or [])
 

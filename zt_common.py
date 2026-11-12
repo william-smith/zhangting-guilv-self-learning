@@ -567,8 +567,15 @@ def score_stock(feat, spot, rules, news=None, mkt_idx=None, code=None, name=None
     comps["topic_effect"] = topic
     comps["block_effect"] = block
     comps["emotion_M"] = M
+    # 观察模式(rules.market.shadow_mode, 缺省 True): 题材/板块分照常产出并写入报告,
+    # 但暂不计入总分。这两个因子的权重是在"长期恒为 0"状态下学出来的, 直接启用会让
+    # 打分分布与排序突变; 观察数日确认分值合理后, 把该项置 false 即正式纳入评分。
+    shadow = bool((rules.get("market") or {}).get("shadow_mode", True))
     if (w_topic > 0 or w_block > 0) and (topic > 0 or block > 0 or M != 1.0):
-        total = (total + w_topic * topic + w_block * block) * M
+        if shadow:
+            total = total * M                     # 与修复前口径一致, 排序不变
+        else:
+            total = (total + w_topic * topic + w_block * block) * M
     return total, comps
 
 

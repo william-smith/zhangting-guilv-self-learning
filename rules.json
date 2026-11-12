@@ -58,6 +58,7 @@
     "topic": {
       "min_topic_count": 2,
       "cap": 6
-    }
+    },
+    "shadow_mode": true
   }
 }

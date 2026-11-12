@@ -212,6 +212,9 @@ def learn(rules, hit_c, non_c):
     nr["version"] = rules.get("version", 1) + 1
     factors = nr["factors"]
     market_keys = [k for k in MARKET_FACTOR_KEYS if k in factors]
+    # 观察模式下题材/板块分未计入总分, 其差分不具预测力含义, 不参与权重学习,
+    # 避免把"展示用分值"误学成有效信号(权重会在恒 0 的旧基线上白漂移)。
+    shadow = bool((nr.get("market") or {}).get("shadow_mode", True))
 
     def _diff_adjust(keys, lo=0.03, hi=0.45):
         """命中组因子均分 > 落选组 -> 上调权重; 反之下调。差分即"该因子是否有预测力"。"""
@@ -232,7 +235,10 @@ def learn(rules, hit_c, non_c):
         # 基础因子: 差分调整
         _diff_adjust([k for k in factors if k not in market_keys])
         # 市场维度因子(题材/板块): 差分调整(加成项, 限幅更窄)
-        _diff_adjust(market_keys, lo=0.03, hi=0.20)
+        if shadow:
+            print("[观察模式] 题材/板块因子未计入评分, 本次跳过其权重学习。")
+        else:
+            _diff_adjust(market_keys, lo=0.03, hi=0.20)
         # 量比阈值向命中组中位数靠拢(仅当命中组有明显量能特征)
         vr = [x["vratio"] for x in hit_c if x["vratio"]]
         if vr:

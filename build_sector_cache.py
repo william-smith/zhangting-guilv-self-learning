@@ -25,7 +25,9 @@ build_sector_cache.py —— 生成 sector_cache.json(个股 -> 所属行业/板
   python3.11 build_sector_cache.py --source em     # 只用东财
   python3.11 build_sector_cache.py --source sina   # 只用新浪
   python3.11 build_sector_cache.py --check         # 只看缓存统计, 不联网
-产物: sector_cache.json = {"600176": ["玻璃行业"], ...}
+产物: sector_cache.json  = {"600176": ["玻璃行业"], ...}            (行业/板块)
+      concept_cache.json = {"600715": ["文化传媒", "国企改革"], ...} (概念/题材)
+                           概念源: 新浪 newFLJK.php?param=class (gn_ 板块 + 同一套成分股接口)
 失败不影响主流程: zt_market 读不到缓存会自动退回名称关键词词典。
 """
 import os, sys, json, re, time, subprocess
@@ -35,13 +37,17 @@ import requests
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 try:
-    from zt_market import SECTOR_CACHE
+    from zt_market import SECTOR_CACHE, CONCEPT_CACHE
 except Exception:                                    # 独立运行兜底
-    SECTOR_CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sector_cache.json")
+    _HERE = os.path.dirname(os.path.abspath(__file__))
+    SECTOR_CACHE = os.path.join(_HERE, "sector_cache.json")
+    CONCEPT_CACHE = os.path.join(_HERE, "concept_cache.json")
 
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
       "Referer": "https://finance.sina.com.cn"}
 HY_LIST = "https://vip.stock.finance.sina.com.cn/q/view/newSinaHy.php"
+# 新浪概念板块(题材)列表: gn_xxx,概念名,成分数,...  与行业同一套成分股接口
+GN_LIST = "https://money.finance.sina.com.cn/q/view/newFLJK.php?param=class"
 HY_STOCKS = ("https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/"
              "Market_Center.getHQNodeData?page=%d&num=%d&sort=symbol&asc=1&node=%s")
 TIMEOUT = 12
@@ -105,18 +111,20 @@ def _get_json_url(url, params=None):
     return None
 
 
-def fetch_industries():
-    """-> [("new_blhy", "玻璃行业", 19), ...]"""
+def _fetch_groups(url, marker):
+    """新浪板块列表通用解析 -> [("new_blhy", "玻璃行业", 19), ...]
+    marker 用于校验响应是否为目标变量(var S_Finance_bankuai_xxx = {...})。
+    """
     for _ in range(3):
         txt = None
         try:
-            r = requests.get(HY_LIST, headers=UA, timeout=TIMEOUT)
+            r = requests.get(url, headers=UA, timeout=TIMEOUT)
             if r.status_code == 200:
                 txt = r.content.decode("gbk", errors="ignore")
         except Exception:
             txt = None
-        if not txt or "sinaindustry" not in txt:
-            raw = _curl(HY_LIST, raw=True)
+        if not txt or marker not in txt:
+            raw = _curl(url, raw=True)
             txt = raw.decode("gbk", errors="ignore") if raw else ""
         m = re.search(r"=\s*(\{.*\})", txt, re.S) if txt else None
         if m:
@@ -138,6 +146,16 @@ def fetch_industries():
                     return out
         time.sleep(0.8)
     return []
+
+
+def fetch_industries():
+    """行业列表 -> [("new_blhy", "玻璃行业", 19), ...]"""
+    return _fetch_groups(HY_LIST, "sinaindustry")
+
+
+def fetch_concepts():
+    """概念(题材)列表 -> [("gn_hwqc", "华为汽车", 97), ...]"""
+    return _fetch_groups(GN_LIST, "bankuai_class")
 
 
 def fetch_members(node, total, page_size=100):
@@ -181,10 +199,9 @@ def fetch_em_industry():
     return mapping
 
 
-def fetch_sina_industry():
-    """新浪行业分类 -> {"600176": ["玻璃行业"], ...}"""
-    inds = fetch_industries()
-    if not inds:
+def _fetch_sina_mapping(groups):
+    """按板块列表逐板块抓成分股 -> {"600176": ["玻璃行业"], ...}"""
+    if not groups:
         return {}
     mapping = {}
 
@@ -193,12 +210,22 @@ def fetch_sina_industry():
         return name, fetch_members(node, cnt)
 
     with ThreadPoolExecutor(max_workers=6) as ex:
-        for name, mem in ex.map(work, inds):
+        for name, mem in ex.map(work, groups):
             for c in mem:
                 mapping.setdefault(c, [])
                 if name not in mapping[c]:
                     mapping[c].append(name)
     return mapping
+
+
+def fetch_sina_industry():
+    """新浪行业分类 -> {"600176": ["玻璃行业"], ...}"""
+    return _fetch_sina_mapping(fetch_industries())
+
+
+def fetch_sina_concepts():
+    """新浪概念(题材)分类 -> {"600715": ["文化传媒", "国企改革"], ...}"""
+    return _fetch_sina_mapping(fetch_concepts())
 
 
 def build(source="auto"):
@@ -223,17 +250,34 @@ def build(source="auto"):
     print("数据源=%s 已写入 %s: %d 只个股, 平均 %.2f 个行业标签"
           % (used, SECTOR_CACHE, len(mapping),
              sum(len(v) for v in mapping.values()) / len(mapping)))
+
+    # ---- 概念(题材)缓存: 目前只有新浪概念板块源, 失败不阻断行业主流程 ----
+    try:
+        cm = fetch_sina_concepts()
+    except Exception as e:
+        print("[warn] 概念(题材)缓存抓取异常: %s" % repr(e)[:120])
+        cm = {}
+    if cm and len(cm) >= 500:
+        json.dump(cm, open(CONCEPT_CACHE, "w", encoding="utf-8"), ensure_ascii=False)
+        print("概念缓存已写入 %s: %d 只个股, 平均 %.2f 个题材标签"
+              % (CONCEPT_CACHE, len(cm),
+                 sum(len(v) for v in cm.values()) / len(cm)))
+    else:
+        print("[warn] 概念(题材)缓存未取到有效数据(得到 %d 只), 保留旧文件; "
+              "题材因子将降级为仅依赖涨停池 enrichment。" % len(cm))
     return mapping
 
 
 def check():
-    if not os.path.exists(SECTOR_CACHE):
-        print("sector_cache.json 不存在 —— 板块映射将只使用名称关键词词典。")
-        return
-    d = json.load(open(SECTOR_CACHE, encoding="utf-8"))
-    print("sector_cache.json: %d 只个股" % len(d))
-    for c in ["600519", "000001", "600176", "000725", "601899"]:
-        print("  样例 %s -> %s" % (c, d.get(c, "-")))
+    for path, label in ((SECTOR_CACHE, "行业"), (CONCEPT_CACHE, "概念/题材")):
+        if not os.path.exists(path):
+            print("%s 不存在 —— %s映射将只依赖涨停池 enrichment 与名称关键词词典。"
+                  % (os.path.basename(path), label))
+            continue
+        d = json.load(open(path, encoding="utf-8"))
+        print("%s: %d 只个股 (%s)" % (os.path.basename(path), len(d), label))
+        for c in ["600519", "000001", "600176", "000725", "601899", "600715"]:
+            print("  样例 %s -> %s" % (c, d.get(c, "-")))
 
 
 if __name__ == "__main__":
