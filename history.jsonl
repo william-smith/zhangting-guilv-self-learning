@@ -52,3 +52,4 @@
 {"date": "2026-11-10", "rule_version": 55, "cand_count": 25, "zt_count": 140, "hits": 9, "precision": 0.36, "recall": 0.0643, "hit_codes": ["600327", "601188", "002708", "603955", "000530", "002578", "605488", "600715", "601595"], "leak_count": 131, "news_count": 60, "news_hits": 2}
 {"date": "2026-11-11", "rule_version": 56, "cand_count": 25, "zt_count": 123, "hits": 5, "precision": 0.2, "recall": 0.0407, "hit_codes": ["600327", "600715", "601595", "002708", "605488"], "leak_count": 118, "news_count": 39, "news_hits": 0}
 {"date": "2026-11-12", "rule_version": 57, "cand_count": 25, "zt_count": 51, "hits": 3, "precision": 0.12, "recall": 0.0588, "hit_codes": ["603706", "002086", "605255"], "leak_count": 48, "news_count": 50, "news_hits": 0}
+{"date": "2026-11-13", "rule_version": 58, "cand_count": 0, "zt_count": 46, "hits": 0, "precision": 0, "recall": 0.0, "hit_codes": [], "leak_count": 46, "news_count": 57, "news_hits": 0}
