@@ -128,8 +128,18 @@ def main():
         print("[严重告警] 有效候选为 0 —— 极可能数据源不可用，本次产物仅供排障参考。")
 
     # ---- 写 JSON(供复盘) ----
+    # data_ok: 上游 K线数据可用性标志, 供收盘复盘区分「确实没票过线」与「数据源故障导致 0 候选」。
+    # 仅当 K线源探测通过且批量抓取的新鲜度校验通过时为 True；降级纯快照/新鲜度失败一律 False。
+    # 复盘据此冻结自学习, 避免把上游故障误读成「量比阈值过严」而无依据下调阈值。
+    _st = C.KLINE_STAT
+    _total = _st.get("total") or 0
+    _fresh = _st.get("fresh") or 0
+    fresh_ratio = round(_fresh / _total, 4) if _total else 0.0
+    data_ok = bool(kline_ok and _st.get("ok"))
     jdata = {"date": datestr, "rule_version": rules.get("version"),
              "news_coverage": len(news_map),
+             "data_ok": data_ok, "kline_ok": bool(kline_ok),
+             "fresh_ratio": fresh_ratio,
              "candidates": [dict(rank=i + 1, code=r["code"], name=r["name"],
                                  score=round(r["score"], 4),
                                  news=round((r.get("news") or {}).get("sentiment", 0) or 0, 3),

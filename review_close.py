@@ -35,8 +35,17 @@ def main():
         return
     cand = json.load(open(jpath, encoding="utf-8"))
     cand_codes = [c["code"] for c in cand["candidates"]]
+    # ---- 上游数据健康判定(向后兼容旧候选文件) ----
+    # 新文件带 data_ok 字段 -> 直接采用；旧文件无该字段 -> 候选为空时保守判为异常。
+    # data_ok=False 表示 K线源不可用/新鲜度校验失败, 此时全部「漏选」与量比阈值无关,
+    # 必须冻结自学习, 否则 learn() 会走「无命中 -> 放宽阈值」分支, 把上游故障
+    # 误学成「阈值过严」并逐次污染参数(宁可冻结, 不可错误学习)。
+    data_ok = cand.get("data_ok")
+    if data_ok is None:
+        data_ok = bool(cand_codes)
+    skip_learn = not bool(data_ok)
     print("== 收盘复盘 %s ==" % datestr)
-    print("早盘候选 %d 只" % len(cand_codes))
+    print("早盘候选 %d 只  上游数据健康: %s" % (len(cand_codes), "正常" if data_ok else "异常"))
 
     # 全市场快照 -> 实际涨停
     codes = C.get_codes()
@@ -120,6 +129,10 @@ def main():
     if done_today:
         print("今日(%s)已复盘，跳过学习，仅重生成报告。" % datestr)
         new_rules = rules
+    elif skip_learn:
+        print("[冻结自学习] 上游候选数据源异常(data_ok=false)，本次仅复盘不调参："
+              "规则版本/权重/量比阈值保持不变。")
+        new_rules = rules
     else:
         new_rules = learn(rules, hit_c, non_c)
         C.save_rules(new_rules)
@@ -135,7 +148,10 @@ def main():
                    cand_count=len(cand_codes), zt_count=len(actual_zt),
                    hits=len(hits), precision=round(precision, 4), recall=round(recall, 4),
                    hit_codes=hits, leak_count=len(leak),
-                   news_count=len(news_map), news_hits=len(news_hit_codes))
+                   news_count=len(news_map), news_hits=len(news_hit_codes),
+                   skipped_learn=skip_learn)
+        if skip_learn:
+            rec["skip_reason"] = "上游候选数据源异常(data_ok=false)，冻结自学习"
         with open(C.HISTORY_FILE, "a", encoding="utf-8") as fh:
             fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
@@ -176,6 +192,9 @@ def main():
                      % (rules.get("market", {}).get("block", {}).get("min_limit_ups", 3),
                         len(hit_with_block), len(hits)))
     lines.append("\n## 规律更新(权重/阈值变化)\n")
+    if skip_learn and not done_today:
+        lines.append("> ⚠️ **本次冻结自学习**：上游候选数据源异常（K线新鲜度校验失败 / 有效候选为 0），"
+                     "「漏选」并非量比阈值过严所致，故不调整权重与阈值，规则版本保持不变。\n")
     for k in rules["factors"]:
         old = rules["factors"][k]["weight"]
         new = new_rules["factors"][k]["weight"]
@@ -187,12 +206,18 @@ def main():
 
     print("\n=== 复盘要点 ===")
     print("命中: %s" % (", ".join("%s%s" % (c, name_map.get(c, "")) for c in hits) or "无"))
-    print("漏选涨停: %d 只(已用于学习)" % len(leak))
+    if skip_learn and not done_today:
+        print("漏选涨停: %d 只(上游数据异常, 本次不用于学习)" % len(leak))
+    else:
+        print("漏选涨停: %d 只(已用于学习)" % len(leak))
     print("信息面: 新闻覆盖 %d 只, 命中股利好催化 %d 只" % (len(news_map), len(news_hit_codes)))
     if mkt_idx:
         print("市场维度: 涨停 %d 只, 情绪 M=%.2f, 已写入 last_board.json"
               % (mkt_idx.get("total", 0), M.emotion_multiplier(mkt_idx, rules)))
-    print("规则已更新 -> v%s，报告: %s" % (new_rules.get("version"), rpath))
+    if skip_learn and not done_today:
+        print("规则保持不变 v%s(冻结自学习)，报告: %s" % (new_rules.get("version"), rpath))
+    else:
+        print("规则已更新 -> v%s，报告: %s" % (new_rules.get("version"), rpath))
 
 
 # 市场维度因子(题材热度/板块效应): 作为加法项参与打分, 自学习时单独差分限幅,
@@ -247,7 +272,10 @@ def learn(rules, hit_c, non_c):
             nr["min_volume_ratio"] = round(max(1.0, min(3.0,
                 0.7 * rules["min_volume_ratio"] + 0.3 * target)), 2)
     else:
-        # 无命中：略微放宽量比阈值以提升次日召回
+        # 无命中：略微放宽量比阈值以提升次日召回。
+        # 前提: 上游数据正常且候选非空(即确实有票过线但全没涨停)。
+        # 候选为 0 的数据源故障日由 main() 的 skip_learn 守卫直接冻结, 不会进到这里,
+        # 避免把「没数据」误判成「阈值太严」(错误归因)。
         nr["min_volume_ratio"] = round(max(1.0, rules["min_volume_ratio"] * 0.95), 2)
 
     # ---- 归一化: 仅对 base 因子(不含市场因子), 保持 base 行为稳定 ----
