@@ -393,6 +393,20 @@ _CALENDAR_CACHE = None          # 进程内缓存: set("2026-09-25", ...)
 _CALENDAR_CACHE_MAX = None      # 日历覆盖的最大日期(判断是否需要刷新)
 _CALENDAR_REFRESH_MIN = 1       # 缓存最短刷新间隔(天)
 
+# ---- 离线交易日兜底表（2026-11-17 加入）----
+# 背景：独立沙箱每次全新，trade_calendar.json 不入库，is_trade_day 主依据是联网拉 akshare，
+# 失败再退到联网拉蓝筹K线。若盘前网络抖动导致两级联网都失败，会把正常交易日误判为
+# "非交易日"而整天跳过、无任何产物与通知（2026-11-17 事故根因）。
+# 这里内置权威休市表（来源 akshare.tool_trade_date_hist_sina，2026-11-17 导出核验），
+# 覆盖年份内完全离线即可精确判定，网络仅用于跨年/新年份刷新。
+_HOLIDAY_WORKDAYS_2026 = {
+    "2026-01-01", "2026-01-02",
+    "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23",
+    "2026-04-06", "2026-05-01", "2026-05-04", "2026-05-05", "2026-06-19", "2026-09-25",
+    "2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06", "2026-10-07",
+}
+_OFFLINE_CALENDAR_YEARS = {2026}   # 内置兜底表覆盖的年份
+
 
 def tz_now_shanghai():
     """返回上海时区当前 datetime（中国不实行夏令时，UTC+8 恒定）。"""
@@ -453,6 +467,13 @@ def is_trade_day(d=None):
     d = d or today
     if d.weekday() >= 5:                 # 周末永不交易
         return False
+    # ---- 第0层: 内置离线休市表（覆盖年份内不依赖网络，杜绝断网误跳过）----
+    if d.year in _OFFLINE_CALENDAR_YEARS:
+        if d.isoformat() in _HOLIDAY_WORKDAYS_2026:
+            return False                 # 内置表明确标注的工作日休市
+        # 内置表覆盖年份内的普通工作日即交易日（休市日已全部列全），可直接返回，
+        # 不再因联网失败而误判；联网日历仅用于跨年刷新与校验。
+        return True
     cal = get_trade_calendar()
     if cal is not None and d <= _CALENDAR_CACHE_MAX:
         # 日历已覆盖该日: 在->交易日, 不在->休市(精确识别周中假/长假后首日)
