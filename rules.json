@@ -1,8 +1,8 @@
 {
-  "version": 60,
-  "updated_at": "2026-11-17 15:41:18",
+  "version": 61,
+  "updated_at": "2026-11-18 15:40:42",
   "candidate_count": 25,
-  "min_volume_ratio": 1.73,
+  "min_volume_ratio": 1.62,
   "factors": {
     "volume_ratio": {
       "weight": 0.0275
@@ -26,7 +26,7 @@
       "weight": 0.0275
     },
     "news_sentiment": {
-      "weight": 0.0004
+      "weight": 0.0003
     },
     "news_heat": {
       "weight": 0.0003
