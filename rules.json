@@ -1,8 +1,8 @@
 {
-  "version": 63,
-  "updated_at": "2026-11-20 15:40:33",
+  "version": 64,
+  "updated_at": "2026-11-23 15:44:20",
   "candidate_count": 25,
-  "min_volume_ratio": 2.03,
+  "min_volume_ratio": 1.77,
   "factors": {
     "volume_ratio": {
       "weight": 0.0275
