@@ -1,23 +1,23 @@
 {
-  "version": 64,
-  "updated_at": "2026-11-23 15:44:20",
+  "version": 65,
+  "updated_at": "2026-11-24 15:40:30",
   "candidate_count": 25,
-  "min_volume_ratio": 1.77,
+  "min_volume_ratio": 1.54,
   "factors": {
     "volume_ratio": {
-      "weight": 0.0275
+      "weight": 0.0261
     },
     "zt_gene": {
-      "weight": 0.1913
+      "weight": 0.1916
     },
     "breakout": {
-      "weight": 0.2604
+      "weight": 0.2608
     },
     "ma_bull": {
-      "weight": 0.2085
+      "weight": 0.2088
     },
     "strength": {
-      "weight": 0.2595
+      "weight": 0.2599
     },
     "small_cap": {
       "weight": 0.0261
